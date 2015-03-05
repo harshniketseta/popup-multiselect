@@ -1,0 +1,53 @@
+.popupMultiSelect.modal {
+
+}
+
+.popupMultiSelect.modal .modal-body > .popupOption {
+    padding: 15px 0px;
+}
+
+.popupMultiSelect.modal .modal-body > .popupOption.selected {
+    color: #fc5510;
+}
+
+.popupMultiSelect.modal .modal-body > .popupOption > .tick {
+    float: right;
+    display: none;
+}
+
+.popupMultiSelect.modal .modal-body > .popupOption.selected > .tick {
+    display: block;
+}
+
+.popupMultiSelect.modal .modal-header > .close {
+    color: #000000;
+}
+
+.optionsContainer {
+    position: relative;
+}
+
+.optionsContainer > .openOptions {
+    position: absolute;
+    right: 0px;
+}
+
+.addedOption {
+    display: inline-block;
+    color: white;
+    background-color: #ffffff;
+    border: 1px solid #333;
+    padding: 5px;
+    border-radius: 3px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    float: left;
+}
+
+.addedOption > .text{
+    color: white;
+}
+
+.removeOption {
+    margin-left: 10px;
+}
