@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Examples - Popup Multi Select</title>
+  <link rel="stylesheet" media="all" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" media="all" href="/src/stylesheets/popupMultiSelect.css">
+
+  <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/src/javascripts/popupMultiSelect.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <h3>Examples</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 text-center">
+      <h4>Basic Example</h4>
+    </div>
+    <div class="col-lg-6">
+      <select multiple name="company[industries]" id="industries">
+        <option value="AGRICULTURE">AGRICULTURE</option>
+        <option value="GROCERY">GROCERY</option>
+        <option value="ACCOUNTING">ACCOUNTING</option>
+        <option value="HEALTH CARE">HEALTH CARE</option>
+        <option value="ADVERTISING">ADVERTISING</option>
+        <option value="INTERNET PUBLISHING">INTERNET PUBLISHING</option>
+        <option value="AEROSPACE">AEROSPACE</option>
+        <option value="INVESTMENT BANKING">INVESTMENT BANKING</option>
+        <option value="AIRCRAFT">AIRCRAFT</option>
+        <option value="LEGAL">LEGAL</option>
+        <option value="AIRLINE">AIRLINE</option>
+        <option value="MANUFACTURING">MANUFACTURING</option>
+        <option value="APPAREL &amp;AMP; ACCESSORIES">APPAREL &amp;AMP; ACCESSORIES</option>
+        <option value="MOTION PICTURE &amp;AMP; VIDEO">MOTION PICTURE &amp;AMP; VIDEO</option>
+        <option value="AUTOMOTIVE">AUTOMOTIVE</option>
+        <option value="MUSIC">MUSIC</option>
+        <option value="BANKING">BANKING</option>
+        <option value="NEWSPAPER PUBLISHERS">NEWSPAPER PUBLISHERS</option>
+        <option value="BROADCASTING">BROADCASTING</option>
+        <option value="ONLINE AUCTIONS">ONLINE AUCTIONS</option>
+        <option value="BROKERAGE">BROKERAGE</option>
+        <option value="PENSION FUNDS">PENSION FUNDS</option>
+        <option value="BIOTECHNOLOGY">BIOTECHNOLOGY</option>
+        <option value="PHARMACEUTICALS">PHARMACEUTICALS</option>
+        <option value="CALL CENTERS">CALL CENTERS</option>
+        <option value="PRIVATE EQUITY">PRIVATE EQUITY</option>
+        <option value="CARGO HANDLING">CARGO HANDLING</option>
+        <option value="PUBLISHING">PUBLISHING</option>
+        <option value="CHEMICAL">CHEMICAL</option>
+        <option value="REAL ESTATE">REAL ESTATE</option>
+        <option value="COMPUTER">COMPUTER</option>
+        <option value="RETAIL &amp;AMP; WHOLESALE">RETAIL &amp;AMP; WHOLESALE</option>
+        <option value="CONSULTING">CONSULTING</option>
+        <option value="SECURITIES &amp;AMP; COMMODITY EXCHANGES">SECURITIES &amp;AMP; COMMODITY EXCHANGES</option>
+        <option value="CONSUMER PRODUCTS">CONSUMER PRODUCTS</option>
+        <option value="SERVICE">SERVICE</option>
+        <option value="COSMETICS">COSMETICS</option>
+        <option value="SOAP &amp;AMP; DETERGENT">SOAP &amp;AMP; DETERGENT</option>
+        <option value="DEFENSE">DEFENSE</option>
+        <option value="SOFTWARE">SOFTWARE</option>
+        <option value="DEPARTMENT STORES">DEPARTMENT STORES</option>
+        <option value="SPORTS">SPORTS</option>
+        <option value="EDUCATION">EDUCATION</option>
+        <option value="TECHNOLOGY">TECHNOLOGY</option>
+        <option value="ELECTRONICS">ELECTRONICS</option>
+        <option value="TELECOMMUNICATIONS">TELECOMMUNICATIONS</option>
+        <option value="ENERGY">ENERGY</option>
+        <option value="TELEVISION">TELEVISION</option>
+        <option value="ENTERTAINMENT &amp;AMP; LEISURE">ENTERTAINMENT &amp;AMP; LEISURE</option>
+        <option value="TRANSPORTATION">TRANSPORTATION</option>
+        <option value="EXECUTIVE SEARCH">EXECUTIVE SEARCH</option>
+        <option value="TRUCKING">TRUCKING</option>
+        <option value="FINANCIAL SERVICES">FINANCIAL SERVICES</option>
+        <option value="VENTURE CAPITAL">VENTURE CAPITAL</option>
+        <option value="FOOD, BEVERAGE &amp;AMP; TOBACCO">FOOD, BEVERAGE &amp;AMP; TOBACCO</option>
+      </select>
+    </div>
+    <div class="col-lg-6">
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
+<script>
+  $(document).ready(function () {
+    $("#industries").popupMultiSelect({title: "Select Industry", maxSelectionAllowed: 5});
+  });
+</script>

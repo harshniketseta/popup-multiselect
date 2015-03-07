@@ -10,32 +10,5 @@
 # Ignore all vagrant stuff:
 .vagrant
 
-# Ignore bundler config.
-/.bundle
-
-# keys if present
-/*.pem
-
-# Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-journal
-
-# Ignore all logfiles and tempfiles.
-/log/*.log
-!/log/.keep
-/tmp
-
-.rvmrc
-*.swp
-.DS_Store
-
-# Ignore all upload files
-/public/uploads/*
-
-# Ignore application configuration
-/config/application.yml
-
-# Ignore database.yml
-# Copy database.yml.sample
-database.yml
-tags
+# Ignore all bower components.
+bower_components/

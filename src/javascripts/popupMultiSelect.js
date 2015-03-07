@@ -15,6 +15,10 @@
    *****************/
   $.fn.popupMultiSelect = function (options) {
 
+    if (typeof popupMultiSelectInitiated === "undefined") {
+      popupMultiSelectInitiated = 1;
+    }
+
     var defaults = {}
       , options = $.extend(defaults, options)
       ;
@@ -22,35 +26,78 @@
     return this.each(function () {
 
       function getOptionContent(jOptionContainer) {
-        return jOptionsContainer.find(".optionsContent");
+        return jOptionContainer.find(".optionsContent");
       }
 
-      function createOption(text, value, index) {
-        var newOptionHTML = "<span class='addedOption'><span class='text'>" + text +
-          "</span><span class='clickable removeOption' data-index='" + index + "'><i class='fa fa-times'></i></span>" +
-          "<input type='hidden' name='" + name + "' value='" + value + "' /></span>";
+      function getModal(jOptionsContainer) {
+        var optionsContainerID = jOptionsContainer.attr("id")
+          , identifier = optionsContainerID.split("_")[1]
+          , jModal = $("#optionsModal_" + identifier)
+          ;
 
-        return $(newOptionHTML);
+        return jModal;
       };
 
-      function removeOption(jRemoveOption, jModal) {
-        var index = jRemoveOption.data("index")
+      function getOptionContainer(jModal) {
+        var modalID = jModal.attr("id")
+          , identifier = modalID.split("_")[1]
+          , jOptionsContainer = $("#optionsContainer_" + identifier)
+          ;
+
+        return jOptionsContainer;
+      };
+
+      function getModalOptionAtIndex(jModal, index) {
+        return jModal.find(".popupOption[data-index='" + index + "']")
+      }
+
+      function getOptionByIndex(jOptionsContainer, index) {
+        return getOptionContent(jOptionsContainer).find(".addedOption").filter(function () {
+          return $(this).data("index") == index;
+        });
+      };
+
+      function createOption(text, index) {
+        var jText = $("<span></span>", {class: "text", text: text})
+          , jRemoveIcon = $("<span></span>", {class: 'glyphicon glyphicon-remove', "aria-hidden": "true"})
+          , jRemoveIconWrap = $("<span></span>", {class: "clickable removeOption"}).append(jRemoveIcon)
+          , jNewOption = $("<span></span>", {class: "addedOption", data: {index: index}}).append(jText).append(jRemoveIconWrap)
+          ;
+
+        return jNewOption;
+      };
+
+      function markSelectOption(jOptionsContainer, index, selected) {
+        var jSelect = jOptionsContainer.find("select");
+
+        jSelect.find("option:nth-child(" + index + ")").attr("selected", selected);
+      }
+
+      function removeOptionHandler(event) {
+        event.stopPropagation();
+        var jRemoveOption = $(this)
           , jAddedOption = jRemoveOption.closest(".addedOption")
-          , jOptionsContainer = jAddedOption.closest(".optionsContainer")
+          , jOpContainer = jRemoveOption.closest(".optionsContainer")
+          ;
+
+        removeOption(jAddedOption);
+        updateHelpBlock(jOpContainer);
+      }
+
+      function removeOption(jAddedOption) {
+        var index = jAddedOption.data("index")
+          , jOpContainer = jAddedOption.closest(".optionsContainer")
+          , jModal = getModal(jOpContainer)
           ;
 
         jAddedOption.remove();
-        jModal.find(".popupOption[data-index='" + index + "']").toggleClass("selected");
-        calculateIconPadding(jOptionsContainer);
+        getModalOptionAtIndex(jModal, index).toggleClass("selected");
+        markSelectOption(jOpContainer, index, false);
+        postProcess(jOpContainer);
         return true;
       };
 
-      function removeOptionByIndex(jOptionsContainer, index) {
-        getOptionByIndex(jOptionsContainer, index).remove();
-        return true;
-      }
-
-      function updateHelpBlock(jOptionsContainer, jModal) {
+      function updateHelpBlock(jOptionsContainer) {
         var helpText = ""
           , currentlySelectedLength = jOptionsContainer.find(".optionsContent").children().length
           , maxSelectionAllowed = jOptionsContainer.data("maxSelectionAllowed") || -1
@@ -67,54 +114,49 @@
         } else if (selectionLeft == 0) {
           helpText = "Done.";
         }
-        jModal.find(".help-block.autoUpdate").html(helpText);
+        getModal(jOptionsContainer).find(".help-block.autoUpdate").html(helpText);
       }
 
-      function addOption(jOption, jOptionsContainer, jModal) {
+      function addOption(jOption, jOptionsContainer) {
         var maxSelectionAllowed = jOptionsContainer.data("maxSelectionAllowed") || -1
           , jOptionsContent = getOptionContent(jOptionsContainer)
           , currentlySelectedLength = jOptionsContent.children().length
+          , jModal = getModal(jOptionsContainer)
           ;
 
         if ((maxSelectionAllowed > 0) && (currentlySelectedLength == maxSelectionAllowed))
           return false;
 
-        var value = jOption.data("value")
-          , index = jOption.data("index")
+        var index = jOption.data("index")
           , jDisplayText = jOption.find(".displayText")
           , displayText = jDisplayText.html()
-          , jNewOption = createOption(displayText, value, index)
+          , jNewOption = createOption(displayText, index)
           ;
 
-
         jOptionsContent.append(jNewOption);
-        jNewOption.find(".removeOption").on("click", function () {
-          event.stopPropagation();
-          var jRemoveOption = $(this);
-
-          removeOption(jRemoveOption, jModal);
-          updateHelpBlock(jOptionsContainer, jModal);
-        });
+        jNewOption.find(".removeOption").on("click", removeOptionHandler);
+        markSelectOption(jOptionsContainer, index, true)
         return true;
       };
 
-      function getOptionByIndex(jOptionsContent, index) {
-        return getOptionContent(jOptionsContainer).find(".removeOption[data-index='" + index + "']").closest(".addedOption");
-      };
-
-      function calculateIconPadding(jOptionsContainer) {
+      function postProcess(jOptionsContainer) {
         var optionsContainerOuterHeight = jOptionsContainer.outerHeight()
+          , optionsContainerOuterWidth = jOptionsContainer.outerWidth()
           , optionsContainerPaddingTop = parseInt(jOptionsContainer.css("padding-top"))
           , optionsContainerPaddingBottom = parseInt(jOptionsContainer.css("padding-bottom"))
           , optionsContainerPaddingRight = parseInt(jOptionsContainer.css("padding-right"))
+          , optionsContainerPaddingLeft = parseInt(jOptionsContainer.css("padding-left"))
+          , jOptionsContent = jOptionsContainer.find(".optionsContent")
           , jOpenOptions = jOptionsContainer.find(".openOptions")
           , jOpenOptionIcon = jOpenOptions.find("i")
           , iconFontSize = 18
           , iconTotalPadding = (optionsContainerOuterHeight - iconFontSize) / 2
           , iconPaddingTop = iconTotalPadding - optionsContainerPaddingTop
           , iconPaddingBottom = iconTotalPadding - optionsContainerPaddingBottom
+          , optionsContentWidth = optionsContainerOuterWidth - optionsContainerPaddingRight - optionsContainerPaddingLeft - iconFontSize
           ;
 
+        jOptionsContent.css({display: "block", width: optionsContentWidth});
         jOpenOptionIcon.css({"font-size": iconFontSize});
         jOpenOptions.css({"height": iconFontSize,
           "padding-top": iconPaddingTop,
@@ -123,99 +165,110 @@
         });
       }
 
-      function createModalBody(jElement) {
-        var modalBodyHTML = "";
-        $.each(jElement.find("option"), function (index, op) {
-          modalBodyHTML += "<div class='popupOption clickable" + (this.selected ? " selected" : "") +
-            "' data-index='" + index + "' data-value='" + op.value + "' >" +
-            "<span class='displayText'>" + op.text + "</span>" +
-            "<span class='tick'><i class='fa fa-check'></i></span>" +
-            "</div>";
+      function extractOptions(jSelect) {
+        return jSelect.find("option");
+      }
+
+      function createModalBodyContent(jSelectOptions) {
+        var jModalBodyContent = [];
+        $.each(jSelectOptions, function (index, option) {
+          var jDisplayText = $("<span></span>", {class: "displayText", text: option.text})
+            , jTickIcon = $("<span></span>", {class: "glyphicon glyphicon-ok", "aria-hidden": "true"})
+            , jTickWrap = $("<span></span>", {class: "tick"}).append(jTickIcon)
+            , jModalOp = $("<div></div>",
+              {class: "popupOption clickable", data: {index: index}}).append(jDisplayText).append(jTickWrap)
+            ;
+
+          if (option.selected) {
+            jModalOp.addClass("selected");
+          }
+          jModalBodyContent.push(jModalOp);
         });
-        return modalBodyHTML;
+        return jModalBodyContent;
       };
 
-      function createModal(modalBody, options) {
-        var title = options.title || "Select Options"
-          , helpText = options.helpText || ""
-          , modalContent = "<div class='modal-body'>" + modalBodyHTML + "</div>"
-          , modalHeader = "<div class='modal-header'>" +
-            "<span class='pull-right clickable close' aria-hidden='true'>&times;</span>" +
-            "<h4 class='modal-title'>" + title + "</h4>" +
-            "<div class='help-block" + (helpText.length > 0 ? "" : " autoUpdate") + "'>" + helpText + "</div>" +
-            "</div>"
-          , modal = "<div class='popupMultiSelect modal fade'><div class='modal-dialog modal-sm'>" +
-            "<div class='modal-content'>" + modalHeader + modalContent +
-            "</div></div></div>"
-          , jModal = $(modal)
+      function createModal(jModalBodyContent, options) {
+        var helpText = options.helpText || ""
+          , maxSelectionAllowed = options.maxSelectionAllowed || -1
+          , jModalBody = $("<div></div>", {class: "modal-body"}).append(jModalBodyContent)
+          , jCloseButton = $("<span></span>", {class: "pull-right clickable glyphicon glyphicon-remove close", "aria-hidden": "true"})
+          , jModalTitle = $("<h4></h4>", {class: "modal-title", text: (options.title || "Select Options")})
+          , jModalHelpBlock = $("<div></div>", {class: "help-block", text: helpText})
+
+        if (!(helpText.length > 0)) {
+          jModalHelpBlock.addClass("autoUpdate");
+        }
+
+        var jModalHeader = $("<div></div>", {class: "modal-header"}).append(jCloseButton).append(jModalTitle).append(jModalHelpBlock)
+          , jModalContent = $("<div></div>", {class: "modal-content"}).append(jModalHeader).append(jModalBody)
+          , jModalDialog = $("<div></div>", {class: "modal-dialog modal-sm"}).append(jModalContent)
+          , jModal = $("<div></div>", {id: "optionsModal_" + options.identifier,
+            class: "popupMultiSelect modal fade"}).append(jModalDialog)
           ;
 
         return jModal;
       };
 
-      function createOptionsContainer(jElement) {
-        var optionsContainerHTML = "<div class='optionsContainer clearfix'>" +
-            "<span class='optionsContent'></span>" +
-            "<span class='openOptions clickable'>" +
-            "<i class='fa fa-list'></i>" +
-            "</span>" +
-            "</div>"
-          , jOptionsContainer = $(optionsContainerHTML)
+      function createOptionsContainer(options) {
+        var jOptionsContent = $("<span></span>", {class: "optionsContent"})
+          , jOpenListIcon = $("<span></span>", {class: "glyphicon glyphicon-list", "aria-hidden": "true"})
+          , jOpenListWrap = $("<span></span>", {class: "openOptions clickable"}).append(jOpenListIcon)
+          , jOptionsContainer = $("<div></div>", {id: "optionsContainer_" + options.identifier,
+              class: "optionsContainer clearfix", data: {maxSelectionAllowed: options.maxSelectionAllowed}}
+          ).append(jOptionsContent).append(jOpenListWrap)
           ;
-
-        jOptionsContainer.copyCSS(jElement);
-        jOptionsContainer.data(jElement.data());
-        jOptionsContainer.css({position: "relative", "min-height": jOptionsContainer.outerHeight(), "height": "auto"});
 
         return jOptionsContainer;
       };
 
-      function reflectCurrentState(jElement, jOptionsContainer, jModal) {
+      function reflectCurrentState(jOptionsContainer, jModal) {
         var success = true;
         $.each(jModal.find(".popupOption.selected"), function () {
           success = success && addOption($(this), jOptionsContainer, jModal);
         });
-        updateHelpBlock(jOptionsContainer, jModal);
+        updateHelpBlock(jOptionsContainer);
         return success;
       };
 
       function initEventListeners(jOptionsContainer, jModal) {
 
         jOptionsContainer.on("click", function () {
-          jModal.modal("show");
+          var jOpContainer = $(this)
+            , jOpModal = getModal(jOpContainer)
+            ;
+
+          jOpModal.modal("show");
         });
 
         jModal.find(".close").on("click", function () {
-          jModal.modal("hide");
+          var jCloseButton = $(this)
+            , jOpModal = jCloseButton.closest(".modal")
+            ;
+
+          jOpModal.modal("hide");
         });
 
         jModal.find(".popupOption").on("click", function (event) {
           var jOption = $(this)
-            , jModal = jOption.closest(".modal")
-            , jOption = $(this)
+            , jOpModal = jOption.closest(".modal")
+            , jOpContainer = getOptionContainer(jOpModal)
             , index = jOption.data("index")
             , success = true
             ;
 
           if (jOption.hasClass("selected")) {
-            success = removeOptionByIndex(jOptionsContainer, index);
+            success = removeOption(getOptionByIndex(jOpContainer, index));
           } else {
-            success = addOption(jOption, jOptionsContainer, jModal);
+            success = addOption(jOption, jOpContainer);
           }
           if (success) {
             jOption.toggleClass("selected");
-            updateHelpBlock(jOptionsContainer, jModal);
-            calculateIconPadding(jOptionsContainer);
+            updateHelpBlock(jOpContainer);
+            postProcess(jOpContainer);
           }
         });
 
-        getOptionContent(jOptionsContainer).find(".removeOption").on("click", function () {
-          event.stopPropagation();
-          var jRemoveOption = $(this);
-
-          removeOption(jRemoveOption, jModal);
-          updateHelpBlock(jOptionsContainer, jModal);
-        });
+        getOptionContent(jOptionsContainer).find(".removeOption").on("click", removeOptionHandler);
       };
 
 //      -------------MAIN CODE STARTS HERE--------------
@@ -226,65 +279,33 @@
         console.log("Popup MultiSelect only possible in select.");
         return true;
       }
+      options.identifier = popupMultiSelectInitiated;
 
-      var options = jElement.data()
-        , name = jElement.attr("name") + "[]"
-        , modalBodyHTML = createModalBody(jElement)
-        , jModal = createModal(modalBodyHTML, options)
+      var jSelectOptions = extractOptions(jElement)
+        , jModalBody = createModalBodyContent(jSelectOptions)
+        , jModal = createModal(jModalBody, options)
+        , jOptionsContainer = createOptionsContainer(options)
         ;
-
-      // Hide existing modals if any and remove.
-      $(".popupMultiSelect.modal").modal("hide").remove();
 
       // Add modal to body.
       $("body").append(jModal);
 
-      // Create options container, which is supposed to replace select.
-      var jOptionsContainer = createOptionsContainer(jElement);
-
       // Replacing select.
       jElement.replaceWith(jOptionsContainer);
+      jElement.css({display: "none"});
+      jOptionsContainer.append(jElement);
 
       // Calculating icon padding.
-      calculateIconPadding(jOptionsContainer);
+      postProcess(jOptionsContainer);
 
-      reflectCurrentState(jElement, jOptionsContainer, jModal);
+      // Adds already selected Options to Options Container.
+      reflectCurrentState(jOptionsContainer, jModal);
 
       // Initializing Event Listeners.
       initEventListeners(jOptionsContainer, jModal);
+
+      popupMultiSelectInitiated += 1;
+
     });
-  };
-
-  // ------------------ Helper Functions ------------------
-  $.fn.copyCSS = function (source) {
-    var styles = $(source).getStyleObject();
-    this.css(styles);
-  };
-
-  $.fn.getStyleObject = function () {
-    var dom = this.get(0);
-    var style;
-    var returns = {};
-    if (window.getComputedStyle) {
-      var camelize = function (a, b) {
-        return b.toUpperCase();
-      };
-      style = window.getComputedStyle(dom, null);
-      for (var i = 0, l = style.length; i < l; i++) {
-        var prop = style[i];
-        var camel = prop.replace(/\-([a-z])/g, camelize);
-        var val = style.getPropertyValue(prop);
-        returns[camel] = val;
-      }
-      return returns;
-    }
-
-    if (style = dom.currentStyle) {
-      for (var prop in style) {
-        returns[prop] = style[prop];
-      }
-      return returns;
-    }
-    return this.css();
   };
 })(jQuery);

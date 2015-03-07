@@ -4,6 +4,7 @@
 
 .popupMultiSelect.modal .modal-body > .popupOption {
     padding: 15px 0px;
+    margin: 0px 15px;
 }
 
 .popupMultiSelect.modal .modal-body > .popupOption.selected {
@@ -29,7 +30,22 @@
 }
 
 .optionsContainer {
+    display: block;
     position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 48px;
+    padding: 6px 12px;
+    font-size: 15px;
+    line-height: 1.42857;
+    color: #4c4444;
+    background-color: #fbfbfb;
+    background-image: none;
+    border: 1px solid #e8e8e8;
+    border-radius: 3px;
+    -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
 .optionsContainer > .openOptions {
@@ -48,10 +64,15 @@
     float: left;
 }
 
-.addedOption > .text{
-    color: white;
+.addedOption > .text {
+    color: #333;
 }
 
 .removeOption {
+    color: #aaa;
     margin-left: 10px;
+}
+
+.clickable {
+    cursor: pointer;
 }
