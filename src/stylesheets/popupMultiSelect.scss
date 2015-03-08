@@ -1,0 +1,77 @@
+.popupMultiSelect.modal {
+
+  .modal-header {
+    > .close {
+      color: #000000;
+    }
+  }
+
+  .modal-body {
+    max-height: 500px;
+    overflow-y: scroll;
+
+    > .popupOption {
+      padding: 15px 0px;
+      margin: 0px 15px;
+
+      > .tick {
+        float: right;
+        display: none;
+      }
+    }
+
+    > .popupOption.selected {
+      color: #fc5510;
+
+      > .tick {
+        display: block;
+      }
+    }
+  }
+}
+
+.optionsContainer {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 48px;
+  padding: 6px 12px;
+  background-color: #fbfbfb;
+  background-image: none;
+  border: 1px solid #e8e8e8;
+  border-radius: 3px;
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+
+  > .openOptions {
+    position: absolute;
+    right: 0px;
+  }
+
+  > .optionsContent {
+    > .addedOption {
+      display: inline-block;
+      color: white;
+      background-color: #ffffff;
+      border: 1px solid #333;
+      padding: 5px;
+      border-radius: 3px;
+      margin: 2px;
+      float: left;
+
+      > .text {
+        color: #333;
+      }
+      > .removeOption {
+        color: #aaa;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}

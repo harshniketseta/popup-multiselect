@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
   // Project configuration.
   grunt.initConfig({
@@ -9,7 +9,7 @@ module.exports = function(grunt) {
       options: {
         laxcomma: true
       },
-      javascript: ['src/javascripts/**/*.js']
+      javascripts: ['src/javascripts/**/*.js']
     },
     uglify: {
       options: {
@@ -18,6 +18,27 @@ module.exports = function(grunt) {
       build: {
         src: 'src/javascripts/<%= pkg.name %>.js',
         dest: 'dist/javascripts/<%= pkg.name %>.min.js'
+      }
+    },
+    sass: {                              // Task
+      dist: {                            // Target
+        options: {                       // Target options
+          style: 'expanded'
+        },
+        files: {                         // Dictionary of files
+          'dist/stylesheets/popupMultiSelect.css': 'src/stylesheets/popupMultiSelect.scss'
+        }
+      }
+    },
+    cssmin: {
+      target: {
+        files: [{
+          expand: true,
+          cwd: 'dist/stylesheets',
+          src: ['*.css', '!*.min.css'],
+          dest: 'dist/stylesheets',
+          ext: '.min.css'
+        }]
       }
     }
   });
@@ -28,7 +49,16 @@ module.exports = function(grunt) {
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  // Default task(s).
-  grunt.registerTask('default', ['jshint', 'uglify']);
+  // Load the plugin that provides the "sass" task.
+  grunt.loadNpmTasks('grunt-contrib-sass');
 
+  // Load the plugin that provides the "cssmin" task.
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+
+  // Defining tasks for js and css.
+  grunt.registerTask('js', ['jshint', 'uglify']);
+  grunt.registerTask('css', ['sass', 'cssmin']);
+
+  // Default task(s).
+  grunt.registerTask('default', ['js', 'css']);
 };
