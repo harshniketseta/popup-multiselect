@@ -13,7 +13,11 @@ module.exports = function (grunt) {
     },
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+        banner: '/*!\n' +
+          ' * <%= pkg.name %> v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
+          ' * Copyright 2011-<%= grunt.template.today("yyyy") %>, Author: <%= pkg.author.name %> <<%= pkg.author.email %>>\n' +
+          ' * Licensed under <%= pkg.license.type %> (<%= pkg.license.url %>)\n' +
+          ' */\n'
       },
       build: {
         src: 'src/javascripts/<%= pkg.name %>.js',
@@ -32,13 +36,15 @@ module.exports = function (grunt) {
     },
     cssmin: {
       target: {
-        files: [{
-          expand: true,
-          cwd: 'dist/stylesheets',
-          src: ['*.css', '!*.min.css'],
-          dest: 'dist/stylesheets',
-          ext: '.min.css'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: 'dist/stylesheets',
+            src: ['*.css', '!*.min.css'],
+            dest: 'dist/stylesheets',
+            ext: '.min.css'
+          }
+        ]
       }
     }
   });
