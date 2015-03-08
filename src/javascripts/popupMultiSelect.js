@@ -3,7 +3,7 @@
  * Popup Multi Select jQuery Plugin
  * Created By Harshniket Seta
  * Currently maintained by harshniketseta [at] gmail [dot] com
- * Version: 1.0
+ * Version: 0.1.0
  * Release: 2015-03-05
 
  */
@@ -20,7 +20,7 @@
     }
 
     var defaults = {}
-      , options = $.extend(defaults, options)
+      , finalOptions = $.extend({}, defaults, options)
       ;
 
     return this.each(function () {
@@ -36,7 +36,7 @@
           ;
 
         return jModal;
-      };
+      }
 
       function getOptionContainer(jModal) {
         var modalID = jModal.attr("id")
@@ -45,17 +45,17 @@
           ;
 
         return jOptionsContainer;
-      };
+      }
 
       function getModalOptionAtIndex(jModal, index) {
-        return jModal.find(".popupOption[data-index='" + index + "']")
+        return jModal.find(".popupOption[data-index='" + index + "']");
       }
 
       function getOptionByIndex(jOptionsContainer, index) {
         return getOptionContent(jOptionsContainer).find(".addedOption").filter(function () {
           return $(this).data("index") == index;
         });
-      };
+      }
 
       function createOption(text, index) {
         var jText = $("<span></span>", {class: "text", text: text})
@@ -65,7 +65,7 @@
           ;
 
         return jNewOption;
-      };
+      }
 
       function markSelectOption(jOptionsContainer, index, selected) {
         var jSelect = jOptionsContainer.find("select");
@@ -95,7 +95,7 @@
         markSelectOption(jOpContainer, index, false);
         postProcess(jOpContainer);
         return true;
-      };
+      }
 
       function updateHelpBlock(jOptionsContainer) {
         var helpText = ""
@@ -107,11 +107,11 @@
         if (maxSelectionAllowed < 1) {
           return;
         }
-        if ((currentlySelectedLength == 0) && (selectionLeft > 0)) {
+        if ((currentlySelectedLength === 0) && (selectionLeft > 0)) {
           helpText = "Select " + selectionLeft;
         } else if (selectionLeft > 0) {
           helpText = "Select " + selectionLeft + " more.";
-        } else if (selectionLeft == 0) {
+        } else if (selectionLeft === 0) {
           helpText = "Done.";
         }
         getModal(jOptionsContainer).find(".help-block.autoUpdate").html(helpText);
@@ -135,9 +135,9 @@
 
         jOptionsContent.append(jNewOption);
         jNewOption.find(".removeOption").on("click", removeOptionHandler);
-        markSelectOption(jOptionsContainer, index, true)
+        markSelectOption(jOptionsContainer, index, true);
         return true;
-      };
+      }
 
       function postProcess(jOptionsContainer) {
         var optionsContainerOuterHeight = jOptionsContainer.outerHeight()
@@ -185,7 +185,7 @@
           jModalBodyContent.push(jModalOp);
         });
         return jModalBodyContent;
-      };
+      }
 
       function createModal(jModalBodyContent, options) {
         var helpText = options.helpText || ""
@@ -194,8 +194,9 @@
           , jCloseButton = $("<span></span>", {class: "pull-right clickable glyphicon glyphicon-remove close", "aria-hidden": "true"})
           , jModalTitle = $("<h4></h4>", {class: "modal-title", text: (options.title || "Select Options")})
           , jModalHelpBlock = $("<div></div>", {class: "help-block", text: helpText})
+          ;
 
-        if (!(helpText.length > 0)) {
+        if (helpText.length === 0) {
           jModalHelpBlock.addClass("autoUpdate");
         }
 
@@ -207,7 +208,7 @@
           ;
 
         return jModal;
-      };
+      }
 
       function createOptionsContainer(options) {
         var jOptionsContent = $("<span></span>", {class: "optionsContent"})
@@ -219,7 +220,7 @@
           ;
 
         return jOptionsContainer;
-      };
+      }
 
       function reflectCurrentState(jOptionsContainer, jModal) {
         var success = true;
@@ -228,7 +229,7 @@
         });
         updateHelpBlock(jOptionsContainer);
         return success;
-      };
+      }
 
       function initEventListeners(jOptionsContainer, jModal) {
 
@@ -269,11 +270,11 @@
         });
 
         getOptionContent(jOptionsContainer).find(".removeOption").on("click", removeOptionHandler);
-      };
+      }
 
 //      -------------MAIN CODE STARTS HERE--------------
 
-      var jElement = $(this)
+      var jElement = $(this);
 
       if (!jElement.is("select")) {
         console.log("Popup MultiSelect only possible in select.");
@@ -283,8 +284,8 @@
 
       var jSelectOptions = extractOptions(jElement)
         , jModalBody = createModalBodyContent(jSelectOptions)
-        , jModal = createModal(jModalBody, options)
-        , jOptionsContainer = createOptionsContainer(options)
+        , jModal = createModal(jModalBody, finalOptions)
+        , jOptionsContainer = createOptionsContainer(finalOptions)
         ;
 
       // Add modal to body.
