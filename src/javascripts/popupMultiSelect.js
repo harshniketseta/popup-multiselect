@@ -191,7 +191,7 @@
         var helpText = options.helpText || ""
           , maxSelectionAllowed = options.maxSelectionAllowed || -1
           , jModalBody = $("<div></div>", {class: "modal-body"}).append(jModalBodyContent)
-          , jCloseButton = $("<span></span>", {class: "pull-right clickable glyphicon glyphicon-remove close", "aria-hidden": "true"})
+          , jCloseButton = $("<span></span>", {class: "pull-right clickable close", "aria-hidden": "true", text: "x"})
           , jModalTitle = $("<h4></h4>", {class: "modal-title", text: (options.title || "Select Options")})
           , jModalHelpBlock = $("<div></div>", {class: "help-block", text: helpText})
           ;
