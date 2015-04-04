@@ -39,6 +39,9 @@
   position: absolute;
   right: 0px;
 }
+.optionsContainer.disabled > .openOptions {
+  display: none;
+}
 .optionsContainer > .optionsContent > .addedOption {
   display: inline-block;
   color: white;
@@ -48,6 +51,7 @@
   border-radius: 3px;
   margin: 2px;
   float: left;
+  cursor: pointer;
 }
 .optionsContainer > .optionsContent > .addedOption > .text {
   color: #333;
@@ -55,6 +59,15 @@
 .optionsContainer > .optionsContent > .addedOption > .removeOption {
   color: #aaa;
   margin-left: 10px;
+}
+.optionsContainer.disabled > .optionsContent > .addedOption {
+  cursor: not-allowed;
+}
+.optionsContainer.disabled > .optionsContent > .addedOption > .text {
+  color: #999;
+}
+.optionsContainer.disabled > .optionsContent > .addedOption > .removeOption {
+  display: none;
 }
 
 .clickable {

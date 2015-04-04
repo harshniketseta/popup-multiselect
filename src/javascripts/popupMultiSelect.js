@@ -15,13 +15,26 @@
    *****************/
   $.fn.popupMultiSelect = function (options) {
 
-    if (typeof popupMultiSelectInitiated === "undefined") {
-      popupMultiSelectInitiated = 1;
+    function getOptionContainerFromElement(jElements) {
+      return jElements.closest(".optionsContainer");
+    }
+
+    if (typeof(options) === "string") {
+      if (options === "disable") {
+        getOptionContainerFromElement(this).addClass("disabled");
+      } else if (options === "enable") {
+        getOptionContainerFromElement(this).removeClass("disabled");
+      }
+      return this;
     }
 
     var defaults = {}
       , finalOptions = $.extend({}, defaults, options)
       ;
+
+    if (typeof popupMultiSelectInitiated === "undefined") {
+      popupMultiSelectInitiated = 1;
+    }
 
     return this.each(function () {
 
@@ -48,7 +61,9 @@
       }
 
       function getModalOptionAtIndex(jModal, index) {
-        return jModal.find(".popupOption[data-index='" + index + "']");
+        return jModal.find(".popupOption").filter(function () {
+          return $(this).data("index") == index;
+        });
       }
 
       function getOptionByIndex(jOptionsContainer, index) {
@@ -77,21 +92,26 @@
         event.stopPropagation();
         var jRemoveOption = $(this)
           , jAddedOption = jRemoveOption.closest(".addedOption")
+          , index = jAddedOption.data("index")
           , jOpContainer = jRemoveOption.closest(".optionsContainer")
+          , jModal = getModal(jOpContainer)
+          , jOption = getModalOptionAtIndex(jModal, index)
+          , success = removeOption(jAddedOption)
           ;
 
-        removeOption(jAddedOption);
-        updateHelpBlock(jOpContainer);
+        if (success) {
+          jOption.toggleClass("selected");
+          updateHelpBlock(jOpContainer);
+          postProcess(jOpContainer);
+        }
       }
 
       function removeOption(jAddedOption) {
         var index = jAddedOption.data("index")
           , jOpContainer = jAddedOption.closest(".optionsContainer")
-          , jModal = getModal(jOpContainer)
           ;
 
         jAddedOption.remove();
-        getModalOptionAtIndex(jModal, index).toggleClass("selected");
         markSelectOption(jOpContainer, index, false);
         postProcess(jOpContainer);
         return true;
@@ -129,11 +149,12 @@
 
         var index = jOption.data("index")
           , jDisplayText = jOption.find(".displayText")
-          , displayText = jDisplayText.html()
+          , displayText = jDisplayText.text()
           , jNewOption = createOption(displayText, index)
           ;
 
         jOptionsContent.append(jNewOption);
+        jNewOption.on("click", showModalOptionOnOptionClick);
         jNewOption.find(".removeOption").on("click", removeOptionHandler);
         markSelectOption(jOptionsContainer, index, true);
         return true;
@@ -210,7 +231,7 @@
         return jModal;
       }
 
-      function createOptionsContainer(options) {
+      function createOptionsContainer(options, disabled) {
         var jOptionsContent = $("<span></span>", {class: "optionsContent"})
           , jOpenListIcon = $("<span></span>", {class: "glyphicon glyphicon-list", "aria-hidden": "true"})
           , jOpenListWrap = $("<span></span>", {class: "openOptions clickable"}).append(jOpenListIcon)
@@ -218,6 +239,8 @@
               class: "optionsContainer clearfix", data: {maxSelectionAllowed: options.maxSelectionAllowed}}
           ).append(jOptionsContent).append(jOpenListWrap)
           ;
+
+        if (disabled) jOptionsContainer.addClass("disabled");
 
         return jOptionsContainer;
       }
@@ -231,15 +254,34 @@
         return success;
       }
 
+      function showModalForContainer(jOptionsContainer) {
+        var jOpModal = getModal(jOptionsContainer);
+
+        jOpModal.modal("show");
+      }
+
+      function showModalOptionOnOptionClick(event) {
+        var jAddedOption = $(this)
+          , index = jAddedOption.data("index")
+          , jOpContainer = jAddedOption.closest(".optionsContainer")
+          ;
+
+        if(jOpContainer.hasClass("disabled")) return false;
+
+        showModalForContainer(jOpContainer);
+      }
+
       function initEventListeners(jOptionsContainer, jModal) {
 
-        jOptionsContainer.on("click", function () {
-          var jOpContainer = $(this)
-            , jOpModal = getModal(jOpContainer)
+        jOptionsContainer.find(".openOptions").on("click", function () {
+          var jOpenOps = $(this)
+            , jOpContainer = jOpenOps.closest(".optionsContainer")
             ;
 
-          jOpModal.modal("show");
+          showModalForContainer(jOpContainer);
         });
+
+        jOptionsContainer.find(".addedOption").on("click", showModalOptionOnOptionClick);
 
         jModal.find(".close").on("click", function () {
           var jCloseButton = $(this)
@@ -268,24 +310,24 @@
             postProcess(jOpContainer);
           }
         });
-
-        getOptionContent(jOptionsContainer).find(".removeOption").on("click", removeOptionHandler);
       }
 
 //      -------------MAIN CODE STARTS HERE--------------
 
-      var jElement = $(this);
+      var jElement = $(this)
+        , isElementDisabled = jElement.prop("disabled")
+        ;
 
       if (!jElement.is("select")) {
         console.log("Popup MultiSelect only possible in select.");
         return true;
       }
-      options.identifier = popupMultiSelectInitiated;
+      finalOptions.identifier = popupMultiSelectInitiated;
 
       var jSelectOptions = extractOptions(jElement)
         , jModalBody = createModalBodyContent(jSelectOptions)
         , jModal = createModal(jModalBody, finalOptions)
-        , jOptionsContainer = createOptionsContainer(finalOptions)
+        , jOptionsContainer = createOptionsContainer(finalOptions, isElementDisabled)
         ;
 
       // Add modal to body.
@@ -293,14 +335,14 @@
 
       // Replacing select.
       jElement.replaceWith(jOptionsContainer);
-      jElement.css({display: "none"});
+      jElement.css({visibility: "hidden", height: "0px", width: "0px"});
       jOptionsContainer.append(jElement);
 
       // Calculating icon padding.
       postProcess(jOptionsContainer);
 
       // Adds already selected Options to Options Container.
-      reflectCurrentState(jOptionsContainer, jModal);
+      reflectCurrentState(jOptionsContainer, jModal, isElementDisabled);
 
       // Initializing Event Listeners.
       initEventListeners(jOptionsContainer, jModal);

@@ -50,6 +50,10 @@
     right: 0px;
   }
 
+  &.disabled > .openOptions {
+    display: none;
+  }
+
   > .optionsContent {
     > .addedOption {
       display: inline-block;
@@ -60,6 +64,7 @@
       border-radius: 3px;
       margin: 2px;
       float: left;
+      cursor: pointer;
 
       > .text {
         color: #333;
@@ -67,6 +72,19 @@
       > .removeOption {
         color: #aaa;
         margin-left: 10px;
+      }
+    }
+  }
+
+  &.disabled > .optionsContent {
+    > .addedOption {
+      cursor: not-allowed;
+      > .text {
+        color: #999;
+      }
+
+      > .removeOption {
+        display: none;
       }
     }
   }
