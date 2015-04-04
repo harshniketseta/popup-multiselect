@@ -46,8 +46,20 @@ module.exports = function (grunt) {
           }
         ]
       }
+    },
+    watch: {
+      all: {
+        options:{
+          livereload: true
+        },
+        files: ['src/stylesheets/popupMultiSelect.scss', 'src/javascripts/**/*.js'],
+        tasks: ['default']
+      }
     }
   });
+
+  // Load the plugin that provides the "watch" task.
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Load the plugin that provides the "jshint" task.
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -62,9 +74,9 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
 
   // Defining tasks for js and css.
-  grunt.registerTask('js', ['jshint', 'uglify']);
-  grunt.registerTask('css', ['sass', 'cssmin']);
+  grunt.registerTask('scripts', ['jshint', 'uglify']);
+  grunt.registerTask('styles', ['sass', 'cssmin']);
 
   // Default task(s).
-  grunt.registerTask('default', ['js', 'css']);
+  grunt.registerTask('default', ['scripts', 'styles']);
 };
