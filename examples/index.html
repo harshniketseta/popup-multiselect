@@ -3,11 +3,11 @@
 <head>
   <title>Examples - Popup Multi Select</title>
   <link rel="stylesheet" media="all" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" media="all" href="/dist/stylesheets/popupMultiSelect.min.css">
+  <link rel="stylesheet" media="all" href="/dist/stylesheets/multiselect.min.css">
 
   <script src="/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="/src/javascripts/popupMultiSelect.js"></script>
+  <script src="/src/javascripts/multiselect.js"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -152,7 +152,7 @@
 
 <script>
   $(document).ready(function () {
-    $("#industries1").popupMultiSelect({title: "Select Industry", maxSelectionAllowed: 5});
-    $("#industries2").popupMultiSelect({title: "Select Industry", maxSelectionAllowed: 5});
+    $("#industries1").multiselect({title: "Select Industry", maxSelectionAllowed: 5});
+    $("#industries2").multiselect({title: "Select Industry", maxSelectionAllowed: 5});
   });
 </script>

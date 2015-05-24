@@ -30,7 +30,7 @@ module.exports = function (grunt) {
           style: 'expanded'
         },
         files: {                         // Dictionary of files
-          'dist/stylesheets/popupMultiSelect.css': 'src/stylesheets/popupMultiSelect.scss'
+          'dist/stylesheets/multiselect.css': 'src/stylesheets/multiselect.scss'
         }
       }
     },
@@ -52,7 +52,7 @@ module.exports = function (grunt) {
         options:{
           livereload: true
         },
-        files: ['src/stylesheets/popupMultiSelect.scss', 'src/javascripts/**/*.js'],
+        files: ['src/stylesheets/multiselect.scss', 'src/javascripts/**/*.js'],
         tasks: ['default']
       }
     }
