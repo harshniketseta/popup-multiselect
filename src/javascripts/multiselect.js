@@ -31,9 +31,10 @@
 
   MultiSelect.DEFAULTS = {
     animation: true,
-    optionTemplate: '<div class="option clickable"><span class="option-text"></span><span class="option-tick"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span></div>',
+    modalOptionTemplate: '<div class="option clickable"><span class="option-text"></span><span class="option-tick"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span></div>',
     selectTemplate: '<div class="selectWrap  clearfix"><span class="select-content"></span><span class="open-options clickable"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></span></div>',
     modalTemplate: '<div class="select modal in" aria-hidden="false"><div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header"><span class="pull-right clickable close" aria-hidden="true">x</span><h4 class="modal-title"></h4><div class="help-block"></div></div><div class="modal-body"></div></div></div></div>',
+    selectOptionTemplate: '<span class="addedOption" ><span class="text"></span><span class="clickable removeOption"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span></span>',
     title: 'Select Options'
   };
 
@@ -67,7 +68,10 @@
 
   MultiSelect.prototype.extractOptions = function () {
     var options = []
-      , configuration = {template: this.options.optionTemplate}
+      , configuration = {
+        modalOptionTemplate: this.options.modalOptionTemplate,
+        selectOptionTemplate: this.options.selectOptionTemplate
+      }
       ;
 
     $.each(this.$element.find("option"), function (index, option) {
@@ -178,7 +182,7 @@
 
   MultiSelect.prototype.getModalClose = function ($modal) {
     return $modal.find(".close");
-  }
+  };
 
   MultiSelect.prototype.initModal = function ($modal) {
     var oMutliSelect = this;
@@ -222,18 +226,47 @@
 
   MultiSelect.prototype.getModalBodyContent = function () {
     var oMutliSelect = this
-      , $modalBodyContent = []
+      , modalBodyContent = []
       ;
 
     $.each(this.$selectOptions, function (index, optionObj) {
-      $modalBodyContent.push(optionObj.createModalOption());
-      optionObj.onSelect = oMutliSelect.optionSelected
+      var jModalOption = optionObj.createModalOption();
+
+      jModalOption.on("click", function () {
+        var $option = $(this)
+          , oOption = $option.data("multiselect.option")
+          ;
+
+        if ($option.hasClass("selected")) {
+          oMutliSelect.optionUnSelected(oOption);
+        } else {
+          oMutliSelect.optionSelected(oOption);
+        }
+
+        oMutliSelect.postProcess();
+      });
+      modalBodyContent.push(jModalOption);
     });
-    return $modalBodyContent;
+    return modalBodyContent;
   };
 
   MultiSelect.prototype.optionSelected = function (jOption) {
-    debugger;
+    var oMultiSelect = this
+      , $selectOption = jOption.getContent()
+      ;
+
+    jOption.selected();
+
+    $selectOption.find(".removeOption").on("click", function () {
+      oMultiSelect.optionUnSelected(jOption);
+    });
+
+    this.getMultiSelectContent().append($selectOption);
+  };
+
+  MultiSelect.prototype.optionUnSelected = function (jOption) {
+    jOption.unselected();
+    jOption.getContent().remove();
   };
 
   MultiSelect.Option = function (element, options) {
@@ -274,27 +307,36 @@
   };
 
   MultiSelect.Option.prototype.createModalOption = function () {
-
     if (!this.$tip) {
-      this.$tip = $(this.options.template);
+      this.$tip = $(this.options.modalOptionTemplate);
 
       this.$tip.find(".option-text").html(this.$element.html());
       if (!this.enabled) this.$tip.addClass("disabled");
 
-      this.initEventListeners();
+      this.$tip.data(this.type, this);
     }
+
     return this.$tip;
   };
 
-  MultiSelect.Option.prototype.initEventListeners = function () {
-    var oMultiSelectOption = this;
+  MultiSelect.Option.prototype.selected = function () {
+    this.$tip.addClass("selected");
+  };
 
-    this.$tip.on("click", function () {
-      $(this).toggleClass("selected");
-      if (typeof(oMultiSelectOption.onSelected) === "function") {
-        oMultiSelectOption.onSelected(oMultiSelectOption);
-      }
-    });
+  MultiSelect.Option.prototype.unselected = function () {
+    this.$tip.removeClass("selected");
+  };
+
+  MultiSelect.Option.prototype.getContent = function () {
+    if (!this.$content) {
+      this.$content = $(this.options.selectOptionTemplate);
+
+      this.$content.find(".text").html(this.$element.html());
+      if (!this.enabled) this.$content.addClass("disabled");
+
+      this.$content.data(this.type, this);
+    }
+    return this.$content;
   };
 
   // MULTISELECT PLUGIN DEFINITION
