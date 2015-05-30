@@ -342,6 +342,18 @@
     }
   };
 
+  MultiSelect.prototype.selectOption = function (value) {
+    var optionObj = this.$element.find("option[value=" + value + "]").data("multiselect.option");
+
+    this.optionSelected(optionObj);
+  };
+
+  MultiSelect.prototype.deselectOption = function (value) {
+    var optionObj = this.$element.find("option[value=" + value + "]").data("multiselect.option");
+
+    this.optionDeSelected(optionObj);
+  };
+
   MultiSelect.prototype.optionSelected = function (optionObj) {
     var e = null;
 
@@ -421,6 +433,7 @@
       throw new Error('Popup MultiSelect Option only possible on option element.');
     }
 
+    this.$element.data(this.type, this);
     this.tip();
   };
 
