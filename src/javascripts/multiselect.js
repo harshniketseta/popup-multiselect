@@ -5,7 +5,7 @@
  * Created By Harshniket Seta
  * Currently maintained by harshniketseta [at] gmail [dot] com
  * Version: 0.2.0
- * Release: 2015-03-05
+ * Release: 2015-05-31
  * ======================================================================== */
 
 (function ($) {
