@@ -47,8 +47,8 @@
       throw new Error('Popup MultiSelect only possible in select.');
     }
 
-    this.$selectOptions = this.extractSelectOptions();
     this.replaceDefaultSelect($element);
+    this.$selectOptions = this.extractSelectOptions();
   };
 
   MultiSelect.prototype.isEnabled = function () {
@@ -61,14 +61,16 @@
 
   MultiSelect.prototype.extractSelectOptions = function () {
     var options = []
-      , configuration = {
-        modalOptionTemplate: this.options.modalOptionTemplate,
-        selectOptionTemplate: this.options.selectOptionTemplate
-      }
+      , configuration = this.getOptionConfig()
+      , oMultiSelect = this
       ;
 
     $.each(this.$element.find("option"), function (index, option) {
-      options.push(new MultiSelect.Option(option, configuration));
+      var optionObj = new MultiSelect.Option(option, configuration);
+      options.push(optionObj);
+      if (optionObj.isSelected()) {
+        oMultiSelect._optionSelected(optionObj);
+      }
     });
 
     return options;
@@ -105,6 +107,13 @@
     options = $.extend({}, this.getDefaults(), this.$element.data(), options);
 
     return options;
+  };
+
+  MultiSelect.prototype.getOptionConfig = function (options) {
+    return {
+      modalOptionTemplate: this.options.modalOptionTemplate,
+      selectOptionTemplate: this.options.selectOptionTemplate
+    };
   };
 
   MultiSelect.prototype.getUID = function (prefix) {
@@ -244,7 +253,7 @@
   MultiSelect.prototype.updateHelpText = function (jOption, e) {
     this.getModalHelpBlock(this.getModal()).html(this.getModalHelpTextContent(jOption, e));
     return true;
-  }
+  };
 
   MultiSelect.prototype.initModal = function ($modal) {
     var oMultiSelect = this;
@@ -280,7 +289,7 @@
         , modalId = this.getUID(this.type)
         ;
 
-      this.setContent();
+      this.appendModal();
       $modal.attr('id', modalId);
       this.$multiSelect.attr('aria-describedby', modalId);
 
@@ -316,57 +325,77 @@
     this.$modal = null;
   };
 
-  MultiSelect.prototype.setContent = function () {
+  MultiSelect.prototype.appendModal = function () {
     $("body").prepend(this.$modal);
   };
 
-  MultiSelect.prototype.optionSelected = function (jOption) {
-    var oMultiSelect = this
-      , $selectOption = jOption.getContent()
-      ;
+  MultiSelect.prototype.addOption = function (attributes) {
+    //{value: "AGRICULTURE", selected: true, html: "AGRICULTURE"}) eg. for attributes.
+    var jOption = $("<option></option>", attributes);
+    this.$element.append(jOption);
 
-    if(this.options.maxSelectionAllowed == this.getSelected().length){
-      var e = $.Event('maxselected.bs.' + this.type);
-      this.$multiSelect.trigger(e, jOption);
+    var optionObj = new MultiSelect.Option(jOption, this.getOptionConfig());
+    this.$selectOptions.push(optionObj);
+
+    if (jOption.prop("selected")) {
+      this.optionSelected(optionObj);
+    }
+  };
+
+  MultiSelect.prototype.optionSelected = function (optionObj) {
+    var e = null;
+
+    if (this.options.maxSelectionAllowed == this.getSelected().length) {
+      e = $.Event('maxselected.bs.' + this.type);
+      this.$multiSelect.trigger(e, optionObj);
       return true;
     }
 
-    var e = $.Event('selected.bs.' + this.type);
-    this.$multiSelect.trigger(e, jOption);
+    e = $.Event('selected.bs.' + this.type);
+    this.$multiSelect.trigger(e, optionObj);
 
     if (e.isDefaultPrevented()) {
       return;
     }
 
-    jOption.selected();
+    optionObj.selected();
 
-    $selectOption.find(".removeOption").on("click", function () {
-      oMultiSelect.optionDeSelected(jOption);
-    });
-    this.getMultiSelectContent().append($selectOption);
+    this._optionSelected(optionObj);
 
     e = $.Event('selectiondone.bs.' + this.type);
-    this.$multiSelect.trigger(e, jOption);
+    this.$multiSelect.trigger(e, optionObj);
 
-    this.updateHelpText(jOption, e);
+    this.updateHelpText(optionObj, e);
     this.postProcess();
   };
 
-  MultiSelect.prototype.optionDeSelected = function (jOption) {
+  MultiSelect.prototype._optionSelected = function (optionObj) {
+    var oMultiSelect = this
+      , $selectOption = optionObj.getContent()
+      ;
+
+    $selectOption.find(".removeOption").on("click", function () {
+      oMultiSelect.optionDeSelected(optionObj);
+    });
+
+    this.getMultiSelectContent().append($selectOption);
+  };
+
+  MultiSelect.prototype.optionDeSelected = function (optionObj) {
     var e = $.Event('deselected.bs.' + this.type);
-    this.$multiSelect.trigger(e, jOption);
+    this.$multiSelect.trigger(e, optionObj);
 
     if (e.isDefaultPrevented()) {
       return;
     }
 
-    jOption.deselected();
-    jOption.getContent().remove();
+    optionObj.deselected();
+    optionObj.getContent().remove();
 
-    var e = $.Event('deselectiondone.bs.' + this.type);
-    this.$multiSelect.trigger(e, jOption);
+    e = $.Event('deselectiondone.bs.' + this.type);
+    this.$multiSelect.trigger(e, optionObj);
 
-    this.updateHelpText(jOption, e);
+    this.updateHelpText(optionObj, e);
     this.postProcess();
   };
 
@@ -391,6 +420,21 @@
     if (!this.$element.is("option")) {
       throw new Error('Popup MultiSelect Option only possible on option element.');
     }
+
+    this.tip();
+  };
+
+  MultiSelect.Option.prototype.tip = function () {
+    if (!this.$tip) {
+      this.$tip = $(this.options.modalOptionTemplate);
+
+      this.$tip.find(".option-text").html(this.$element.html());
+      if (!this.enabled) this.$tip.addClass("disabled");
+
+      if (this.isSelected()) {
+        this.selected();
+      }
+    }
   };
 
   MultiSelect.Option.prototype.getDefaults = function () {
@@ -408,23 +452,23 @@
   };
 
   MultiSelect.Option.prototype.createModalOption = function () {
-    if (!this.$tip) {
-      this.$tip = $(this.options.modalOptionTemplate);
 
-      this.$tip.find(".option-text").html(this.$element.html());
-      if (!this.enabled) this.$tip.addClass("disabled");
-
-    }
     this.$tip.data(this.type, this);
 
     return this.$tip;
   };
 
+  MultiSelect.Option.prototype.isSelected = function () {
+    return this.$element.prop("selected");
+  };
+
   MultiSelect.Option.prototype.selected = function () {
+    this.$element.attr("selected", "selected");
     this.$tip.addClass("selected");
   };
 
   MultiSelect.Option.prototype.deselected = function () {
+    this.$element.removeAttr("selected");
     this.$tip.removeClass("selected");
   };
 
@@ -444,14 +488,20 @@
   // =========================
 
   function Plugin(option) {
+    var optionalParams = Array.prototype.slice.call(arguments);
+    optionalParams.shift();
     return this.each(function () {
       var $this = $(this);
       var data = $this.data('bs.multiselect');
       var options = typeof option == 'object' && option;
 
       if (!data && /destroy|hide/.test(option)) return;
-      if (!data) $this.data('bs.multiselect', (data = new MultiSelect(this, options)));
-      if (typeof option == 'string') data[option]();
+      if (!data) {
+        data = new MultiSelect(this, options);
+        $this = data.$element;
+        $this.data('bs.multiselect', data);
+      }
+      if (typeof option == 'string') data[option].apply(data, optionalParams);
     });
   }
 
