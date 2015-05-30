@@ -1,6 +1,6 @@
 {
-  "name": "popupMultiSelect",
-  "description": "popup Multi Select Widget based on Bootstrap.",
+  "name": "multiselect",
+  "description": "Popup Multi Select Widget based on Bootstrap.",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://github.com/harshniketseta/popupMultiSelect",

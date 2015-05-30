@@ -1,26 +1,26 @@
-.popupMultiSelect.modal .modal-header > .close {
+.select.modal .modal-header > .close {
   color: #000000;
 }
-.popupMultiSelect.modal .modal-body {
+.select.modal .modal-body {
   max-height: 500px;
   overflow-y: scroll;
 }
-.popupMultiSelect.modal .modal-body > .popupOption {
+.select.modal .modal-body > .option {
   padding: 15px 0px;
   margin: 0px 15px;
 }
-.popupMultiSelect.modal .modal-body > .popupOption > .tick {
+.select.modal .modal-body > .option > .option-tick {
   float: right;
   display: none;
 }
-.popupMultiSelect.modal .modal-body > .popupOption.selected {
+.select.modal .modal-body > .option.selected {
   color: #fc5510;
 }
-.popupMultiSelect.modal .modal-body > .popupOption.selected > .tick {
+.select.modal .modal-body > .option.selected > .option-tick {
   display: block;
 }
 
-.optionsContainer {
+.selectWrap {
   display: block;
   position: relative;
   width: 100%;
@@ -35,14 +35,20 @@
   -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
-.optionsContainer > .openOptions {
+.selectWrap > .open-options {
   position: absolute;
   right: 0px;
 }
-.optionsContainer.disabled > .openOptions {
+.selectWrap > .open-options > span.glyphicon {
+  font-size: 14px;
+}
+.selectWrap.disabled > .open-options {
   display: none;
 }
-.optionsContainer > .optionsContent > .addedOption {
+.selectWrap > .select-content {
+  display: block;
+}
+.selectWrap > .select-content > .addedOption {
   display: inline-block;
   color: white;
   background-color: #ffffff;
@@ -53,20 +59,20 @@
   float: left;
   cursor: pointer;
 }
-.optionsContainer > .optionsContent > .addedOption > .text {
+.selectWrap > .select-content > .addedOption > .text {
   color: #333;
 }
-.optionsContainer > .optionsContent > .addedOption > .removeOption {
+.selectWrap > .select-content > .addedOption > .removeOption {
   color: #aaa;
   margin-left: 10px;
 }
-.optionsContainer.disabled > .optionsContent > .addedOption {
+.selectWrap.disabled > .select-content > .addedOption {
   cursor: not-allowed;
 }
-.optionsContainer.disabled > .optionsContent > .addedOption > .text {
+.selectWrap.disabled > .select-content > .addedOption > .text {
   color: #999;
 }
-.optionsContainer.disabled > .optionsContent > .addedOption > .removeOption {
+.selectWrap.disabled > .select-content > .addedOption > .removeOption {
   display: none;
 }
 
@@ -74,4 +80,4 @@
   cursor: pointer;
 }
 
-/*# sourceMappingURL=popupMultiSelect.css.map */
+/*# sourceMappingURL=multiselect.css.map */
