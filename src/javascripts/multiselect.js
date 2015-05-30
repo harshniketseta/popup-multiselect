@@ -21,7 +21,6 @@
     this.$element = null;
     this.type = "multiselect";
 
-
     this.init(element, options);
   };
 
@@ -31,10 +30,10 @@
 
   MultiSelect.DEFAULTS = {
     animation: true,
-    modalOptionTemplate: '<div class="option clickable"><span class="option-text"></span><span class="option-tick"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span></div>',
-    selectTemplate: '<div class="selectWrap  clearfix"><span class="select-content"></span><span class="open-options clickable"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></span></div>',
-    modalTemplate: '<div class="select modal in" aria-hidden="false"><div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header"><span class="pull-right clickable close" aria-hidden="true">x</span><h4 class="modal-title"></h4><div class="help-block"></div></div><div class="modal-body"></div></div></div></div>',
+    selectTemplate: '<div class="selectWrap clearfix"><span class="select-content"></span><span class="open-options clickable"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></span></div>',
     selectOptionTemplate: '<span class="addedOption" ><span class="text"></span><span class="clickable removeOption"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span></span>',
+    modalTemplate: '<div class="select modal in" aria-hidden="false"><div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header"><span class="pull-right clickable close" aria-hidden="true">x</span><h4 class="modal-title"></h4><div class="help-block"></div></div><div class="modal-body"></div></div></div></div>',
+    modalOptionTemplate: '<div class="option clickable"><span class="option-text"></span><span class="option-tick"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span></div>',
     title: 'Select Options'
   };
 
@@ -48,25 +47,19 @@
       throw new Error('Popup MultiSelect only possible in select.');
     }
 
-    this.$selectOptions = this.extractOptions();
+    this.$selectOptions = this.extractSelectOptions();
     this.replaceDefaultSelect($element);
-  };
-
-  MultiSelect.prototype.getDefaults = function () {
-    return MultiSelect.DEFAULTS;
-  };
-
-  MultiSelect.prototype.getOptions = function (options) {
-    options = $.extend({}, this.getDefaults(), this.$element.data(), options);
-
-    return options;
   };
 
   MultiSelect.prototype.isEnabled = function () {
     return !this.$element.prop("disabled");
   };
 
-  MultiSelect.prototype.extractOptions = function () {
+  MultiSelect.prototype.hasSelectOptions = function () {
+    return this.$selectOptions.length > 0;
+  };
+
+  MultiSelect.prototype.extractSelectOptions = function () {
     var options = []
       , configuration = {
         modalOptionTemplate: this.options.modalOptionTemplate,
@@ -81,10 +74,55 @@
     return options;
   };
 
+  MultiSelect.prototype.replaceDefaultSelect = function ($element) {
+
+    var $multiSelect = this.getMultiSelect();
+    $element.replaceWith($multiSelect);
+    this.$element.css({visibility: "hidden", height: "0px", width: "0px"});
+    $multiSelect.append(this.$element);
+
+    // Calculating open icon position.
+    this.postProcess();
+
+    // Initializing Event Listeners.
+    this.initMultiSelect();
+
+  };
+
+  MultiSelect.prototype.initMultiSelect = function () {
+    var oMultiSelect = this;
+
+    this.getMultiSelectOpen().on("click", function () {
+      oMultiSelect.show();
+    });
+  };
+
+  MultiSelect.prototype.getDefaults = function () {
+    return MultiSelect.DEFAULTS;
+  };
+
+  MultiSelect.prototype.getOptions = function (options) {
+    options = $.extend({}, this.getDefaults(), this.$element.data(), options);
+
+    return options;
+  };
+
+  MultiSelect.prototype.getUID = function (prefix) {
+    do prefix += ~~(Math.random() * 1000000);
+    while (document.getElementById(prefix));
+    return prefix;
+  };
+
   MultiSelect.prototype.getMultiSelect = function () {
+
     if (!this.$multiSelect) {
       this.$multiSelect = $(this.options.selectTemplate);
       if (!this.enabled) this.$multiSelect.addClass("disabled");
+
+      var elementClasses = this.$element.prop("class").split(" ");
+      for (var i = 0; i < elementClasses.length; i++) {
+        this.$multiSelect.addClass(elementClasses[i]);
+      }
     }
 
     return this.$multiSelect;
@@ -110,68 +148,9 @@
     return this.getMultiSelectContent().children();
   };
 
-  MultiSelect.prototype.replaceDefaultSelect = function ($element) {
-
-    var $multiSelect = this.getMultiSelect();
-    $element.replaceWith($multiSelect);
-    this.$element.css({visibility: "hidden", height: "0px", width: "0px"});
-    $multiSelect.append(this.$element);
-
-    // Calculating open icon position.
-    this.postProcess();
-
-    // Initializing Event Listeners.
-    this.initMultiSelect();
-
-  };
-
-  MultiSelect.prototype.postProcess = function () {
-    var multiSelectHeight = this.$multiSelect.height()
-      , multiSelectOuterWidth = this.$multiSelect.outerWidth()
-      , multiSelectPaddingRight = parseInt(this.$multiSelect.css("padding-right"))
-      , multiSelectPaddingLeft = parseInt(this.$multiSelect.css("padding-left"))
-      , $selectContent = this.getMultiSelectContent()
-      , $openOptions = this.getMultiSelectOpen()
-      , $openIcon = this.getSelectOpenIcon()
-      , iconFontSize = parseInt($openIcon.css("font-size"))
-      , iconPadding = (multiSelectHeight - iconFontSize) / 2
-      , optionsContentWidth = multiSelectOuterWidth - multiSelectPaddingRight - multiSelectPaddingLeft - iconFontSize
-      ;
-
-    $selectContent.css({width: optionsContentWidth});
-    $openOptions.css({
-      "height": iconFontSize,
-      "padding-top": iconPadding,
-      "padding-bottom": iconPadding,
-      right: multiSelectPaddingRight
-    });
-  };
-
-  MultiSelect.prototype.initMultiSelect = function () {
-    var oMutliSelect = this;
-
-    this.getMultiSelectOpen().on("click", function () {
-      oMutliSelect.show();
-    });
-  };
-
-  MultiSelect.prototype.show = function () {
-
-    var $modal = this.getModal();
-    $("body").prepend($modal);
-    $modal.modal("show");
-  };
-
-  MultiSelect.prototype.hide = function () {
-
-    var $modal = this.getModal();
-    $modal.modal("hide");
-  };
-
   MultiSelect.prototype.getModal = function () {
     if (!this.$modal) {
       this.$modal = $(this.options.modalTemplate);
-      if (this.options.animation) this.$modal.addClass("fade");
       this.getModalHelpBlock(this.$modal).html(this.getModalHelpTextContent());
       this.getModalBody(this.$modal).html(this.getModalBodyContent());
       this.initModal(this.$modal);
@@ -182,14 +161,6 @@
 
   MultiSelect.prototype.getModalClose = function ($modal) {
     return $modal.find(".close");
-  };
-
-  MultiSelect.prototype.initModal = function ($modal) {
-    var oMutliSelect = this;
-
-    this.getModalClose($modal).on("click", function () {
-      oMutliSelect.hide();
-    });
   };
 
   MultiSelect.prototype.getModalHelpBlock = function ($modal) {
@@ -225,7 +196,7 @@
   };
 
   MultiSelect.prototype.getModalBodyContent = function () {
-    var oMutliSelect = this
+    var oMultiSelect = this
       , modalBodyContent = []
       ;
 
@@ -238,16 +209,113 @@
           ;
 
         if ($option.hasClass("selected")) {
-          oMutliSelect.optionUnSelected(oOption);
+          oMultiSelect.optionUnSelected(oOption);
         } else {
-          oMutliSelect.optionSelected(oOption);
+          oMultiSelect.optionSelected(oOption);
         }
 
-        oMutliSelect.postProcess();
+        oMultiSelect.postProcess();
       });
       modalBodyContent.push(jModalOption);
     });
     return modalBodyContent;
+  };
+
+  MultiSelect.prototype.postProcess = function () {
+    var multiSelectHeight = this.$multiSelect.height()
+      , multiSelectOuterWidth = this.$multiSelect.outerWidth()
+      , multiSelectPaddingRight = parseInt(this.$multiSelect.css("padding-right"))
+      , multiSelectPaddingLeft = parseInt(this.$multiSelect.css("padding-left"))
+      , $selectContent = this.getMultiSelectContent()
+      , $openOptions = this.getMultiSelectOpen()
+      , $openIcon = this.getSelectOpenIcon()
+      , iconFontSize = parseInt($openIcon.css("font-size"))
+      , iconPadding = (multiSelectHeight - iconFontSize) / 2
+      , optionsContentWidth = multiSelectOuterWidth - multiSelectPaddingRight - multiSelectPaddingLeft - iconFontSize
+      ;
+
+    $selectContent.css({width: optionsContentWidth});
+    $openOptions.css({
+      "height": iconFontSize,
+      "padding-top": iconPadding,
+      "padding-bottom": iconPadding,
+      right: multiSelectPaddingRight
+    });
+  };
+
+  MultiSelect.prototype.initModal = function ($modal) {
+    var oMultiSelect = this;
+
+    this.getModalClose($modal).on("click", function () {
+      oMultiSelect.hide();
+    });
+
+    $modal.on("hide.bs.modal", function (event) {
+      var e = $.Event('hide.bs.' + oMultiSelect.type);
+      oMultiSelect.$multiSelect.trigger(e);
+    });
+
+    $modal.on("hidden.bs.modal", function (event) {
+      var e = $.Event('hidden.bs.' + oMultiSelect.type);
+      oMultiSelect.$multiSelect.trigger(e);
+      oMultiSelect.cleanModal();
+    });
+  };
+
+  MultiSelect.prototype.show = function () {
+    var e = $.Event('show.bs.' + this.type);
+
+    if (this.hasSelectOptions() && this.enabled) {
+      this.$multiSelect.trigger(e);
+      var inDom = $.contains(this.$multiSelect[0].ownerDocument.documentElement, this.$multiSelect[0]);
+
+      if (e.isDefaultPrevented() || !inDom) {
+        return;
+      }
+
+      var $modal = this.getModal()
+        , modalId = this.getUID(this.type)
+        ;
+
+      this.setContent();
+      $modal.attr('id', modalId);
+      this.$multiSelect.attr('aria-describedby', modalId);
+
+      if (this.options.animation) $modal.addClass('fade');
+      $("body").prepend($modal);
+
+      var oMultiSelect = this;
+      $modal.on("shown.bs.modal", function () {
+        var e = $.Event('shown.bs.' + oMultiSelect.type);
+        oMultiSelect.$multiSelect.trigger(e);
+      });
+
+      $modal.modal("show");
+    }
+  };
+
+  MultiSelect.prototype.hide = function () {
+
+    var e = $.Event('hide.bs.' + this.type);
+    this.$multiSelect.trigger(e);
+
+    if (e.isDefaultPrevented()) {
+      return;
+    }
+
+    var $modal = this.getModal();
+    $modal.modal("hide");
+  };
+
+  MultiSelect.prototype.cleanModal = function () {
+    var $modal = this.getModal();
+
+    $modal.remove();
+    $modal = null;
+  };
+
+  MultiSelect.prototype.setContent = function () {
+    $("body").prepend(this.$modal);
   };
 
   MultiSelect.prototype.optionSelected = function (jOption) {
@@ -259,6 +327,7 @@
 
     $selectOption.find(".removeOption").on("click", function () {
       oMultiSelect.optionUnSelected(jOption);
+      oMultiSelect.postProcess();
     });
 
     this.getMultiSelectContent().append($selectOption);
