@@ -18,6 +18,7 @@
     this.options = null;
     this.enabled = null;
     this.timeout = null;
+    this.modalShown = null;
     this.$element = null;
     this.type = "multiselect";
 
@@ -134,6 +135,9 @@
       }
     }
 
+    var multiSelectId = this.getUID(this.$element.attr("id") || "selectContainer");
+    this.$multiSelect.attr("id", multiSelectId);
+    this.$element.attr('aria-describedby', multiSelectId);
     return this.$multiSelect;
   };
 
@@ -268,6 +272,7 @@
     });
 
     $modal.on("hidden.bs.modal", function (event) {
+      oMultiSelect.modalShown = false;
       var e = $.Event('hidden.bs.' + oMultiSelect.type);
       oMultiSelect.$multiSelect.trigger(e);
       oMultiSelect.cleanModal();
@@ -298,6 +303,7 @@
 
       var oMultiSelect = this;
       $modal.on("shown.bs.modal", function () {
+        oMultiSelect.modalShown = true;
         var e = $.Event('shown.bs.' + oMultiSelect.type);
         oMultiSelect.$multiSelect.trigger(e);
       });
@@ -339,6 +345,10 @@
 
     if (jOption.prop("selected")) {
       this.optionSelected(optionObj);
+    }
+
+    if(this.modalShown){
+      this.getModalBody().append(optionObj.createModalOption());
     }
   };
 
