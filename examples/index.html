@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="description" content="Popupmultiselect : A popup with options. Allows multi select. Based on Bootstrap.">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" media="all" href="/dist/stylesheets/multiselect.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+  <script src="/dist/javascripts/multiselect.min.js"></script>
+  <script src="/javascripts/main.js"></script>
+
+  <title>Popupmultiselect</title>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div id="header_wrap" class="outer">
+  <header class="inner">
+    <a id="forkme_banner" href="https://github.com/harshniketseta/popupMultiSelect">View on GitHub</a>
+
+    <h1 id="project_title">Popupmultiselect</h1>
+
+    <h2 id="project_tagline">A popup with options. Allows multi select. Based on Bootstrap.</h2>
+
+    <h3 style="color: white;">Examples</h3>
+    <section id="downloads">
+      <a class="zip_download_link" href="https://github.com/harshniketseta/popupMultiSelect/zipball/master">Download
+        this project as a .zip file</a>
+      <a class="tar_download_link" href="https://github.com/harshniketseta/popupMultiSelect/tarball/master">Download
+        this project as a tar.gz file</a>
+    </section>
+  </header>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="main_content_wrap" class="outer">
+  <section id="main_content" class="inner">
+  </section>
+
+  <section>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="col-lg-12 text-center">
+            <h4>Basic Example</h4>
+          </div>
+          <div class="col-lg-12">
+            <select multiple name="company[industries]" id="industries1">
+              <option value="AGRICULTURE" selected>AGRICULTURE</option>
+              <option value="GROCERY">GROCERY</option>
+              <option value="ACCOUNTING">ACCOUNTING</option>
+              <option value="HEALTH CARE">HEALTH CARE</option>
+              <option value="ADVERTISING">ADVERTISING</option>
+              <option value="INTERNET PUBLISHING">INTERNET PUBLISHING</option>
+              <option value="AEROSPACE">AEROSPACE</option>
+              <option value="INVESTMENT BANKING">INVESTMENT BANKING</option>
+              <option value="AIRCRAFT">AIRCRAFT</option>
+              <option value="LEGAL">LEGAL</option>
+              <option value="AIRLINE">AIRLINE</option>
+              <option value="MANUFACTURING">MANUFACTURING</option>
+              <option value="APPAREL & ACCESSORIES">APPAREL & ACCESSORIES</option>
+              <option value="MOTION PICTURE & VIDEO">MOTION PICTURE & VIDEO</option>
+              <option value="AUTOMOTIVE">AUTOMOTIVE</option>
+              <option value="MUSIC">MUSIC</option>
+              <option value="BANKING">BANKING</option>
+              <option value="NEWSPAPER PUBLISHERS">NEWSPAPER PUBLISHERS</option>
+              <option value="BROADCASTING">BROADCASTING</option>
+              <option value="ONLINE AUCTIONS">ONLINE AUCTIONS</option>
+              <option value="BROKERAGE">BROKERAGE</option>
+              <option value="PENSION FUNDS">PENSION FUNDS</option>
+              <option value="BIOTECHNOLOGY">BIOTECHNOLOGY</option>
+              <option value="PHARMACEUTICALS">PHARMACEUTICALS</option>
+              <option value="CALL CENTERS">CALL CENTERS</option>
+              <option value="PRIVATE EQUITY">PRIVATE EQUITY</option>
+              <option value="CARGO HANDLING">CARGO HANDLING</option>
+              <option value="PUBLISHING">PUBLISHING</option>
+              <option value="CHEMICAL">CHEMICAL</option>
+              <option value="REAL ESTATE">REAL ESTATE</option>
+              <option value="COMPUTER">COMPUTER</option>
+              <option value="RETAIL & WHOLESALE">RETAIL & WHOLESALE</option>
+              <option value="CONSULTING">CONSULTING</option>
+              <option value="SECURITIES & COMMODITY EXCHANGES">SECURITIES & COMMODITY EXCHANGES</option>
+              <option value="CONSUMER PRODUCTS">CONSUMER PRODUCTS</option>
+              <option value="SERVICE">SERVICE</option>
+              <option value="COSMETICS">COSMETICS</option>
+              <option value="SOAP & DETERGENT">SOAP & DETERGENT</option>
+              <option value="DEFENSE">DEFENSE</option>
+              <option value="SOFTWARE">SOFTWARE</option>
+              <option value="DEPARTMENT STORES">DEPARTMENT STORES</option>
+              <option value="SPORTS">SPORTS</option>
+              <option value="EDUCATION">EDUCATION</option>
+              <option value="TECHNOLOGY">TECHNOLOGY</option>
+              <option value="ELECTRONICS">ELECTRONICS</option>
+              <option value="TELECOMMUNICATIONS">TELECOMMUNICATIONS</option>
+              <option value="ENERGY">ENERGY</option>
+              <option value="TELEVISION">TELEVISION</option>
+              <option value="ENTERTAINMENT & LEISURE">ENTERTAINMENT & LEISURE</option>
+              <option value="TRANSPORTATION">TRANSPORTATION</option>
+              <option value="EXECUTIVE SEARCH">EXECUTIVE SEARCH</option>
+              <option value="TRUCKING">TRUCKING</option>
+              <option value="FINANCIAL SERVICES">FINANCIAL SERVICES</option>
+              <option value="VENTURE CAPITAL">VENTURE CAPITAL</option>
+              <option value="FOOD, BEVERAGE & TOBACCO" selected>FOOD, BEVERAGE & TOBACCO</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="col-lg-12 text-center">
+            <h4>Basic Example (Disabled)</h4>
+          </div>
+          <div class="col-lg-12">
+            <select multiple name="company[industries]" id="industries2" disabled>
+              <option value="AGRICULTURE" selected>AGRICULTURE</option>
+              <option value="GROCERY">GROCERY</option>
+              <option value="ACCOUNTING">ACCOUNTING</option>
+              <option value="HEALTH CARE">HEALTH CARE</option>
+              <option value="ADVERTISING">ADVERTISING</option>
+              <option value="INTERNET PUBLISHING">INTERNET PUBLISHING</option>
+              <option value="AEROSPACE">AEROSPACE</option>
+              <option value="INVESTMENT BANKING">INVESTMENT BANKING</option>
+              <option value="AIRCRAFT">AIRCRAFT</option>
+              <option value="LEGAL">LEGAL</option>
+              <option value="AIRLINE">AIRLINE</option>
+              <option value="MANUFACTURING">MANUFACTURING</option>
+              <option value="APPAREL & ACCESSORIES">APPAREL & ACCESSORIES</option>
+              <option value="MOTION PICTURE & VIDEO">MOTION PICTURE & VIDEO</option>
+              <option value="AUTOMOTIVE">AUTOMOTIVE</option>
+              <option value="MUSIC">MUSIC</option>
+              <option value="BANKING">BANKING</option>
+              <option value="NEWSPAPER PUBLISHERS">NEWSPAPER PUBLISHERS</option>
+              <option value="BROADCASTING">BROADCASTING</option>
+              <option value="ONLINE AUCTIONS">ONLINE AUCTIONS</option>
+              <option value="BROKERAGE">BROKERAGE</option>
+              <option value="PENSION FUNDS">PENSION FUNDS</option>
+              <option value="BIOTECHNOLOGY">BIOTECHNOLOGY</option>
+              <option value="PHARMACEUTICALS">PHARMACEUTICALS</option>
+              <option value="CALL CENTERS">CALL CENTERS</option>
+              <option value="PRIVATE EQUITY">PRIVATE EQUITY</option>
+              <option value="CARGO HANDLING">CARGO HANDLING</option>
+              <option value="PUBLISHING">PUBLISHING</option>
+              <option value="CHEMICAL">CHEMICAL</option>
+              <option value="REAL ESTATE">REAL ESTATE</option>
+              <option value="COMPUTER">COMPUTER</option>
+              <option value="RETAIL & WHOLESALE">RETAIL & WHOLESALE</option>
+              <option value="CONSULTING">CONSULTING</option>
+              <option value="SECURITIES & COMMODITY EXCHANGES">SECURITIES & COMMODITY EXCHANGES</option>
+              <option value="CONSUMER PRODUCTS">CONSUMER PRODUCTS</option>
+              <option value="SERVICE">SERVICE</option>
+              <option value="COSMETICS">COSMETICS</option>
+              <option value="SOAP & DETERGENT">SOAP & DETERGENT</option>
+              <option value="DEFENSE">DEFENSE</option>
+              <option value="SOFTWARE">SOFTWARE</option>
+              <option value="DEPARTMENT STORES">DEPARTMENT STORES</option>
+              <option value="SPORTS">SPORTS</option>
+              <option value="EDUCATION">EDUCATION</option>
+              <option value="TECHNOLOGY">TECHNOLOGY</option>
+              <option value="ELECTRONICS">ELECTRONICS</option>
+              <option value="TELECOMMUNICATIONS">TELECOMMUNICATIONS</option>
+              <option value="ENERGY">ENERGY</option>
+              <option value="TELEVISION">TELEVISION</option>
+              <option value="ENTERTAINMENT & LEISURE">ENTERTAINMENT & LEISURE</option>
+              <option value="TRANSPORTATION">TRANSPORTATION</option>
+              <option value="EXECUTIVE SEARCH">EXECUTIVE SEARCH</option>
+              <option value="TRUCKING">TRUCKING</option>
+              <option value="FINANCIAL SERVICES">FINANCIAL SERVICES</option>
+              <option value="VENTURE CAPITAL">VENTURE CAPITAL</option>
+              <option value="FOOD, BEVERAGE & TOBACCO" selected>FOOD, BEVERAGE & TOBACCO</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="inner"></section>
+</div>
+
+<!-- FOOTER  -->
+<div id="footer_wrap" class="outer">
+  <footer class="inner">
+    <p class="copyright">Popupmultiselect maintained by <a href="https://github.com/harshniketseta">harshniketseta</a>
+    </p>
+
+    <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+  </footer>
+</div>
+
+
+</body>
+</html>
