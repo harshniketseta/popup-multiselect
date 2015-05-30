@@ -175,7 +175,7 @@
     return $modal.find(".modal-body");
   };
 
-  MultiSelect.prototype.getModalHelpTextContent = function () {
+  MultiSelect.prototype.getModalHelpTextContent = function (jOption, action) {
     var helpText = ""
       , currentlySelectedLength = this.getSelected().length
       , maxSelectionAllowed = this.options.maxSelectionAllowed
@@ -209,12 +209,10 @@
           ;
 
         if ($option.hasClass("selected")) {
-          oMultiSelect.optionUnSelected(oOption);
+          oMultiSelect.optionDeSelected(oOption);
         } else {
           oMultiSelect.optionSelected(oOption);
         }
-
-        oMultiSelect.postProcess();
       });
       modalBodyContent.push(jModalOption);
     });
@@ -242,6 +240,11 @@
       right: multiSelectPaddingRight
     });
   };
+
+  MultiSelect.prototype.updateHelpText = function (jOption, e) {
+    this.getModalHelpBlock(this.getModal()).html(this.getModalHelpTextContent(jOption, e));
+    return true;
+  }
 
   MultiSelect.prototype.initModal = function ($modal) {
     var oMultiSelect = this;
@@ -308,10 +311,9 @@
   };
 
   MultiSelect.prototype.cleanModal = function () {
-    var $modal = this.getModal();
-
-    $modal.remove();
-    $modal = null;
+    this.$multiSelect.removeAttr('aria-describedby');
+    this.$modal.remove();
+    this.$modal = null;
   };
 
   MultiSelect.prototype.setContent = function () {
@@ -323,19 +325,49 @@
       , $selectOption = jOption.getContent()
       ;
 
+    if(this.options.maxSelectionAllowed == this.getSelected().length){
+      var e = $.Event('maxselected.bs.' + this.type);
+      this.$multiSelect.trigger(e, jOption);
+      return true;
+    }
+
+    var e = $.Event('selected.bs.' + this.type);
+    this.$multiSelect.trigger(e, jOption);
+
+    if (e.isDefaultPrevented()) {
+      return;
+    }
+
     jOption.selected();
 
     $selectOption.find(".removeOption").on("click", function () {
-      oMultiSelect.optionUnSelected(jOption);
-      oMultiSelect.postProcess();
+      oMultiSelect.optionDeSelected(jOption);
     });
-
     this.getMultiSelectContent().append($selectOption);
+
+    e = $.Event('selectiondone.bs.' + this.type);
+    this.$multiSelect.trigger(e, jOption);
+
+    this.updateHelpText(jOption, e);
+    this.postProcess();
   };
 
-  MultiSelect.prototype.optionUnSelected = function (jOption) {
-    jOption.unselected();
+  MultiSelect.prototype.optionDeSelected = function (jOption) {
+    var e = $.Event('deselected.bs.' + this.type);
+    this.$multiSelect.trigger(e, jOption);
+
+    if (e.isDefaultPrevented()) {
+      return;
+    }
+
+    jOption.deselected();
     jOption.getContent().remove();
+
+    var e = $.Event('deselectiondone.bs.' + this.type);
+    this.$multiSelect.trigger(e, jOption);
+
+    this.updateHelpText(jOption, e);
+    this.postProcess();
   };
 
   MultiSelect.Option = function (element, options) {
@@ -382,8 +414,8 @@
       this.$tip.find(".option-text").html(this.$element.html());
       if (!this.enabled) this.$tip.addClass("disabled");
 
-      this.$tip.data(this.type, this);
     }
+    this.$tip.data(this.type, this);
 
     return this.$tip;
   };
@@ -392,7 +424,7 @@
     this.$tip.addClass("selected");
   };
 
-  MultiSelect.Option.prototype.unselected = function () {
+  MultiSelect.Option.prototype.deselected = function () {
     this.$tip.removeClass("selected");
   };
 
