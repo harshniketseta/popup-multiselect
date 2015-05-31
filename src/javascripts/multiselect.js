@@ -288,13 +288,13 @@
 
     $modal.on("hide.bs.modal", function (event) {
       var e = $.Event('hide.bs.' + oMultiSelect.type);
-      oMultiSelect.$multiSelect.trigger(e);
+      oMultiSelect.$element.trigger(e);
     });
 
     $modal.on("hidden.bs.modal", function (event) {
       oMultiSelect.modalShown = false;
       var e = $.Event('hidden.bs.' + oMultiSelect.type);
-      oMultiSelect.$multiSelect.trigger(e);
+      oMultiSelect.$element.trigger(e);
       oMultiSelect.cleanModal();
     });
   };
@@ -325,7 +325,7 @@
       $modal.on("shown.bs.modal", function () {
         oMultiSelect.modalShown = true;
         var e = $.Event('shown.bs.' + oMultiSelect.type);
-        oMultiSelect.$multiSelect.trigger(e);
+        oMultiSelect.$element.trigger(e);
       });
 
       $modal.modal("show");
