@@ -56,6 +56,7 @@
           <div class="col-lg-12 text-center">
             <h4>Basic Example</h4>
           </div>
+
           <div class="col-lg-12">
             <select multiple name="company[industries]" id="industries1">
               <option value="AGRICULTURE" selected>AGRICULTURE</option>
@@ -116,6 +117,15 @@
             </select>
           </div>
         </div>
+        <div class="col-lg-6">
+          <h4>Code</h4>
+              <pre><code>$("#industries1").multiselect({title: "Select Industry",
+                maxSelectionAllowed: 5});</code></pre>
+
+        </div>
+      </div>
+
+      <div class="row">
         <div class="col-lg-6">
           <div class="col-lg-12 text-center">
             <h4>Basic Example (Disabled)</h4>
@@ -179,12 +189,30 @@
               <option value="FOOD, BEVERAGE & TOBACCO" selected>FOOD, BEVERAGE & TOBACCO</option>
             </select>
           </div>
+
+          <div class="col-lg-12">
+            <div class="col-lg-offset-3 col-lg-3">
+              <input type="button" value="Enable" class="enable btn btn-success"/>
+            </div>
+            <div class="col-lg-3">
+              <input type="button" value="Disable" class="disable btn btn-danger"/>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <h4>Code to enable</h4>
+            <pre><code>$("input.enable").on("click", function(){
+                $("#industries2").multiselect("enable");
+              });
+              </code></pre>
+          <h4>Code to disable</h4>
+          <pre><code>$("input.disable").on("click", function(){
+                $("#industries2").multiselect("disable");
+              });</code></pre>
         </div>
       </div>
     </div>
   </section>
-
-  <section class="inner"></section>
 </div>
 
 <!-- FOOTER  -->
