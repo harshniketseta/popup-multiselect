@@ -17,6 +17,7 @@
   var MultiSelect = function (element, options) {
     this.options = null;
     this.enabled = null;
+    this.multiple = null;
     this.timeout = null;
     this.modalShown = null;
     this.$element = null;
@@ -42,6 +43,7 @@
     var $element = $(element);
     this.$element = $element.clone(true, true);
     this.enabled = this.isEnabled();
+    this.multiple = this.isMultiple();
     this.options = this.getOptions(options);
 
     if (!this.$element.is("select")) {
@@ -54,6 +56,10 @@
 
   MultiSelect.prototype.isEnabled = function () {
     return !this.$element.prop("disabled");
+  };
+
+  MultiSelect.prototype.isMultiple = function () {
+    return this.$element.prop("multiple");
   };
 
   MultiSelect.prototype.hasSelectOptions = function () {
@@ -106,7 +112,9 @@
 
   MultiSelect.prototype.getOptions = function (options) {
     options = $.extend({}, this.getDefaults(), this.$element.data(), options);
-
+    if (!this.multiple) {
+      options.maxSelectionAllowed = 1;
+    }
     return options;
   };
 
@@ -165,6 +173,7 @@
     if (!this.$modal) {
       this.$modal = $(this.options.modalTemplate);
       this.getModalHelpBlock(this.$modal).html(this.getModalHelpTextContent());
+      this.getModalTitleBlock(this.$modal).html(this.getModalTitle());
       this.getModalBody(this.$modal).html(this.getModalBodyContent());
       this.initModal(this.$modal);
     }
@@ -180,6 +189,12 @@
     $modal = $modal || this.getModal();
 
     return $modal.find(".help-block");
+  };
+
+  MultiSelect.prototype.getModalTitleBlock = function ($modal) {
+    $modal = $modal || this.getModal();
+
+    return $modal.find(".modal-title");
   };
 
   MultiSelect.prototype.getModalBody = function ($modal) {
@@ -206,6 +221,10 @@
       helpText = "Done.";
     }
     return helpText;
+  };
+
+  MultiSelect.prototype.getModalTitle = function () {
+    return this.options.title;
   };
 
   MultiSelect.prototype.getModalBodyContent = function () {
@@ -283,7 +302,7 @@
     var e = $.Event('show.bs.' + this.type);
 
     if (this.hasSelectOptions() && this.enabled) {
-      this.$multiSelect.trigger(e);
+      this.$element.trigger(e);
       var inDom = $.contains(this.$multiSelect[0].ownerDocument.documentElement, this.$multiSelect[0]);
 
       if (e.isDefaultPrevented() || !inDom) {
@@ -315,7 +334,7 @@
   MultiSelect.prototype.hide = function () {
 
     var e = $.Event('hide.bs.' + this.type);
-    this.$multiSelect.trigger(e);
+    this.$element.trigger(e);
 
     if (e.isDefaultPrevented()) {
       return;
@@ -347,7 +366,7 @@
       this.optionSelected(optionObj);
     }
 
-    if(this.modalShown){
+    if (this.modalShown) {
       this.getModalBody().append(optionObj.createModalOption());
     }
   };
@@ -364,17 +383,43 @@
     this.optionDeSelected(optionObj);
   };
 
+  MultiSelect.prototype.enable = function () {
+    if(this.enabled){
+      return;
+    }
+
+    this.$multiSelect.removeClass("disabled");
+    this.$element.prop("disabled", false);
+    this.enabled = true;
+
+    var e = $.Event('enabled.bs.' + this.type);
+    this.$element.trigger(e);
+  };
+
+  MultiSelect.prototype.disable = function () {
+    if(!this.enabled){
+      return;
+    }
+
+    this.$multiSelect.addClass("disabled");
+    this.$element.prop("disabled", true);
+    this.enabled = false;
+
+    var e = $.Event('disabled.bs.' + this.type);
+    this.$element.trigger(e);
+  };
+
   MultiSelect.prototype.optionSelected = function (optionObj) {
     var e = null;
 
     if (this.options.maxSelectionAllowed == this.getSelected().length) {
       e = $.Event('maxselected.bs.' + this.type);
-      this.$multiSelect.trigger(e, optionObj);
+      this.$element.trigger(e, optionObj);
       return true;
     }
 
     e = $.Event('selected.bs.' + this.type);
-    this.$multiSelect.trigger(e, optionObj);
+    this.$element.trigger(e, optionObj);
 
     if (e.isDefaultPrevented()) {
       return;
@@ -385,7 +430,7 @@
     this._optionSelected(optionObj);
 
     e = $.Event('selectiondone.bs.' + this.type);
-    this.$multiSelect.trigger(e, optionObj);
+    this.$element.trigger(e, optionObj);
 
     this.updateHelpText(optionObj, e);
     this.postProcess();
@@ -405,7 +450,7 @@
 
   MultiSelect.prototype.optionDeSelected = function (optionObj) {
     var e = $.Event('deselected.bs.' + this.type);
-    this.$multiSelect.trigger(e, optionObj);
+    this.$element.trigger(e, optionObj);
 
     if (e.isDefaultPrevented()) {
       return;
@@ -415,7 +460,7 @@
     optionObj.getContent().remove();
 
     e = $.Event('deselectiondone.bs.' + this.type);
-    this.$multiSelect.trigger(e, optionObj);
+    this.$element.trigger(e, optionObj);
 
     this.updateHelpText(optionObj, e);
     this.postProcess();
