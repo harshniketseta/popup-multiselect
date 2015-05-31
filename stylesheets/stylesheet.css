@@ -427,3 +427,14 @@ Small Device Styles
 .row{
   margin-top: 10px;
 }
+
+.buttonWrap{
+    margin: 5px 0px;
+}
+
+#eventsArea{
+  width: 100%;
+    resize: none;
+    border-radius: 3px;
+    height: 200px;
+}

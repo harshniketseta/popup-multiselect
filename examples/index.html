@@ -190,25 +190,151 @@
             </select>
           </div>
 
-          <div class="col-lg-12">
-            <div class="col-lg-offset-3 col-lg-3">
-              <input type="button" value="Enable" class="enable btn btn-success"/>
-            </div>
-            <div class="col-lg-3">
-              <input type="button" value="Disable" class="disable btn btn-danger"/>
-            </div>
+          <div class="col-lg-12 buttonWrap">
+            <input type="button" value="Enable" class="enable2 btn btn-success"/>
+            <input type="button" value="Disable" class="disable2 btn btn-danger"/>
           </div>
         </div>
         <div class="col-lg-6">
           <h4>Code to enable</h4>
             <pre><code>$("input.enable").on("click", function(){
-                $("#industries2").multiselect("enable");
+              $("#industries2").multiselect("enable");
               });
-              </code></pre>
+            </code></pre>
           <h4>Code to disable</h4>
           <pre><code>$("input.disable").on("click", function(){
-                $("#industries2").multiselect("disable");
-              });</code></pre>
+            $("#industries2").multiselect("disable");
+            });</code></pre>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="col-lg-12 text-center">
+            <h4>Basic Example (Action and Events)</h4>
+          </div>
+          <div class="col-lg-12">
+            <select multiple name="company[industries]" id="industries3">
+              <option value="AGRICULTURE">AGRICULTURE</option>
+              <option value="GROCERY">GROCERY</option>
+              <option value="ACCOUNTING">ACCOUNTING</option>
+              <option value="HEALTH CARE">HEALTH CARE</option>
+              <option value="ADVERTISING">ADVERTISING</option>
+              <option value="INTERNET PUBLISHING">INTERNET PUBLISHING</option>
+              <option value="AEROSPACE">AEROSPACE</option>
+              <option value="INVESTMENT BANKING">INVESTMENT BANKING</option>
+              <option value="AIRCRAFT">AIRCRAFT</option>
+              <option value="LEGAL">LEGAL</option>
+              <option value="AIRLINE">AIRLINE</option>
+              <option value="MANUFACTURING">MANUFACTURING</option>
+              <option value="APPAREL & ACCESSORIES">APPAREL & ACCESSORIES</option>
+              <option value="MOTION PICTURE & VIDEO">MOTION PICTURE & VIDEO</option>
+              <option value="AUTOMOTIVE">AUTOMOTIVE</option>
+              <option value="MUSIC">MUSIC</option>
+              <option value="BANKING">BANKING</option>
+              <option value="NEWSPAPER PUBLISHERS">NEWSPAPER PUBLISHERS</option>
+              <option value="BROADCASTING">BROADCASTING</option>
+              <option value="ONLINE AUCTIONS">ONLINE AUCTIONS</option>
+              <option value="BROKERAGE">BROKERAGE</option>
+              <option value="PENSION FUNDS">PENSION FUNDS</option>
+              <option value="BIOTECHNOLOGY">BIOTECHNOLOGY</option>
+              <option value="PHARMACEUTICALS">PHARMACEUTICALS</option>
+              <option value="CALL CENTERS">CALL CENTERS</option>
+              <option value="PRIVATE EQUITY">PRIVATE EQUITY</option>
+              <option value="CARGO HANDLING">CARGO HANDLING</option>
+              <option value="PUBLISHING">PUBLISHING</option>
+              <option value="CHEMICAL">CHEMICAL</option>
+              <option value="REAL ESTATE">REAL ESTATE</option>
+              <option value="COMPUTER">COMPUTER</option>
+              <option value="RETAIL & WHOLESALE">RETAIL & WHOLESALE</option>
+              <option value="CONSULTING">CONSULTING</option>
+              <option value="SECURITIES & COMMODITY EXCHANGES">SECURITIES & COMMODITY EXCHANGES</option>
+              <option value="CONSUMER PRODUCTS">CONSUMER PRODUCTS</option>
+              <option value="SERVICE">SERVICE</option>
+              <option value="COSMETICS">COSMETICS</option>
+              <option value="SOAP & DETERGENT">SOAP & DETERGENT</option>
+              <option value="DEFENSE">DEFENSE</option>
+              <option value="SOFTWARE">SOFTWARE</option>
+              <option value="DEPARTMENT STORES">DEPARTMENT STORES</option>
+              <option value="SPORTS">SPORTS</option>
+              <option value="EDUCATION">EDUCATION</option>
+              <option value="TECHNOLOGY">TECHNOLOGY</option>
+              <option value="ELECTRONICS">ELECTRONICS</option>
+              <option value="TELECOMMUNICATIONS">TELECOMMUNICATIONS</option>
+              <option value="ENERGY">ENERGY</option>
+              <option value="TELEVISION">TELEVISION</option>
+              <option value="ENTERTAINMENT & LEISURE">ENTERTAINMENT & LEISURE</option>
+              <option value="TRANSPORTATION">TRANSPORTATION</option>
+              <option value="EXECUTIVE SEARCH">EXECUTIVE SEARCH</option>
+              <option value="TRUCKING">TRUCKING</option>
+              <option value="FINANCIAL SERVICES">FINANCIAL SERVICES</option>
+              <option value="VENTURE CAPITAL">VENTURE CAPITAL</option>
+              <option value="FOOD, BEVERAGE & TOBACCO">FOOD, BEVERAGE & TOBACCO</option>
+            </select>
+          </div>
+
+          <div class="col-lg-12 buttonWrap">
+            <input type="button" value="Enable" class="enable3 btn btn-success"/>
+            <input type="button" value="Disable" class="disable3 btn btn-danger"/>
+            <input type="button" value="Show" class="show3 btn btn-info"/>
+            <input type="button" value="Hide" class="hide3 btn btn-warning"/>
+          </div>
+
+          <div class="col-lg-8 buttonWrap">
+            <input class="form-control" placeholder="Enter value" id="optionValue"/>
+          </div>
+          <div class="col-lg-4 buttonWrap">
+            <input type="button" value="Select" class="select3 btn btn-success"/>
+            <input type="button" value="Deselect" class="deselect3 btn btn-danger"/>
+          </div>
+
+          <div class="col-lg-6 buttonWrap">
+            <input class="form-control" placeholder="Enter value" placeholder="Enter Value" id="newOptionValue"/>
+          </div>
+          <div class="col-lg-6 buttonWrap">
+            <input class="form-control" placeholder="Enter text" id="newOptionText"/>
+          </div>
+          <div class="col-lg-4 buttonWrap">
+            <input type="checkbox" id="newOptionSelected"/>
+            <label for="newOptionSelected">Pre Selected</label>
+          </div>
+          <div class="col-lg-4 buttonWrap">
+            <input type="button" value="Add Option" class="addOption3 btn btn-success"/>
+          </div>
+          <div class="col-lg-12 buttonWrap">
+            <h4>Events</h4>
+              <textarea id="eventsArea">
+
+              </textarea>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <h4>Code to show</h4>
+            <pre><code>$("input.show3").on("click", function () {
+              $("#industries3").multiselect("show");
+              });
+            </code></pre>
+          <h4>Code to hide</h4>
+          <pre><code>$("input.hide3").on("click", function () {
+            $("#industries3").multiselect("hide");
+            });</code></pre>
+          <h4>Code to select</h4>
+          <pre><code>$("input.select3").on("click", function () {
+            $("#industries3").multiselect("selectOption", $("#optionValue").val().trim());
+            });</code></pre>
+          <h4>Code to deselect</h4>
+          <pre><code>$("input.deselect3").on("click", function () {
+            $("#industries3").multiselect("deselectOption", $("#optionValue").val().trim());
+            });</code></pre>
+          <h4>Code to add option</h4>
+          <pre><code>$("input.addOption3").on("click", function () {
+            var option = {
+            value: $("#newOptionValue").val(),
+            html: $("#newOptionText").val(),
+            selected: $("#newOptionSelected").prop("checked")
+            }
+            $("#industries3").multiselect("addOption", option);
+            });</code></pre>
         </div>
       </div>
     </div>
