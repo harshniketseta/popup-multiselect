@@ -289,6 +289,10 @@
     $modal.on("hide.bs.modal", function (event) {
       var e = $.Event('hide.bs.' + oMultiSelect.type);
       oMultiSelect.$element.trigger(e);
+
+      if (e.isDefaultPrevented()) {
+        event.preventDefault();
+      }
     });
 
     $modal.on("hidden.bs.modal", function (event) {
@@ -333,14 +337,6 @@
   };
 
   MultiSelect.prototype.hide = function () {
-
-    var e = $.Event('hide.bs.' + this.type);
-    this.$element.trigger(e);
-
-    if (e.isDefaultPrevented()) {
-      return;
-    }
-
     var $modal = this.getModal();
     $modal.modal("hide");
   };
