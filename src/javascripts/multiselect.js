@@ -32,7 +32,7 @@
 
   MultiSelect.DEFAULTS = {
     animation: true,
-    selectTemplate: '<div class="selectWrap clearfix"><span class="select-content"></span><span class="open-options clickable"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></span></div>',
+    selectTemplate: '<div class="selectWrap clearfix"><span class="select-content"></span><a href="#" class="open-options clickable"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></a></div>',
     selectOptionTemplate: '<span class="addedOption" ><span class="text"></span><span class="clickable removeOption"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span></span>',
     modalTemplate: '<div class="select modal in" aria-hidden="false"><div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header"><span class="pull-right clickable close" aria-hidden="true">x</span><h4 class="modal-title"></h4><div class="help-block"></div></div><div class="modal-body"></div></div></div></div>',
     modalOptionTemplate: '<div class="option clickable"><span class="option-text"></span><span class="option-tick"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span></div>',
@@ -101,7 +101,8 @@
   MultiSelect.prototype.initMultiSelect = function () {
     var oMultiSelect = this;
 
-    this.getMultiSelectOpen().on("click", function () {
+    this.getMultiSelectOpen().on("click", function (event) {
+      event.preventDefault();
       oMultiSelect.show();
     });
   };
@@ -267,8 +268,8 @@
     $selectContent.css({width: optionsContentWidth});
     $openOptions.css({
       "height": iconFontSize,
-      "padding-top": iconPadding,
-      "padding-bottom": iconPadding,
+      "margin-top": iconPadding,
+      "margin-bottom": iconPadding,
       right: multiSelectPaddingRight
     });
   };

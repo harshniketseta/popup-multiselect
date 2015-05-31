@@ -44,9 +44,12 @@
   -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  margin-bottom: 10px;
 
   > .open-options {
     position: absolute;
+    text-decoration: none;
+    color: #000;
     right: 0px;
 
     > span.glyphicon {
