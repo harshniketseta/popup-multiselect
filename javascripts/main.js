@@ -111,7 +111,7 @@ $(document).ready(function () {
       html: $("#newOptionText").val(),
       selected: $("#newOptionSelected").prop("checked")
     }
-    ga && ga('send', 'event', 'multiselect', 'hide', JSON.stringify(options));
+    ga && ga('send', 'event', 'multiselect', 'addOption', JSON.stringify(option));
     $("#industries3").multiselect("addOption", option);
   });
 
