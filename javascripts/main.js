@@ -7,10 +7,14 @@ $(document).ready(function () {
   };
 
   $("input.enable2").on("click", function () {
+
+    ga && ga('send', 'event', 'multiselect', 'enable');
     $("#industries2").multiselect("enable");
   });
 
   $("input.disable2").on("click", function () {
+
+    ga && ga('send', 'event', 'multiselect', 'disable');
     $("#industries2").multiselect("disable");
   });
 
@@ -62,28 +66,43 @@ $(document).ready(function () {
     logEvent(event);
   });
 
+  $("#industries3").on("maxselected.bs.multiselect", function (event) {
+    logEvent(event);
+  });
+
   $("input.enable3").on("click", function () {
+    ga && ga('send', 'event', 'multiselect', 'enable');
     $("#industries3").multiselect("enable");
   });
 
   $("input.disable3").on("click", function () {
+    ga && ga('send', 'event', 'multiselect', 'disable');
     $("#industries3").multiselect("disable");
   });
 
   $("input.show3").on("click", function () {
+    ga && ga('send', 'event', 'multiselect', 'show');
     $("#industries3").multiselect("show");
   });
 
   $("input.hide3").on("click", function () {
+
+    ga && ga('send', 'event', 'multiselect', 'hide');
     $("#industries3").multiselect("hide");
   });
 
   $("input.select3").on("click", function () {
-    $("#industries3").multiselect("selectOption", $("#optionValue").val().trim());
+    var value = $("#optionValue").val().trim();
+
+    ga && ga('send', 'event', 'multiselect', 'select', value);
+    $("#industries3").multiselect("selectOption", value);
   });
 
   $("input.deselect3").on("click", function () {
-    $("#industries3").multiselect("deselectOption", $("#optionValue").val().trim());
+    var value = $("#optionValue").val().trim();
+
+    ga && ga('send', 'event', 'multiselect', 'deselect', value);
+    $("#industries3").multiselect("deselectOption", value);
   });
 
   $("input.addOption3").on("click", function () {
@@ -92,6 +111,7 @@ $(document).ready(function () {
       html: $("#newOptionText").val(),
       selected: $("#newOptionSelected").prop("checked")
     }
+    ga && ga('send', 'event', 'multiselect', 'hide', JSON.stringify(options));
     $("#industries3").multiselect("addOption", option);
   });
 
