@@ -54,6 +54,10 @@ $(document).ready(function () {
     logEvent(event);
   });
 
+  $("#industries3").on("addingoption.bs.multiselect", function (event) {
+    logEvent(event);
+  });
+
   $("#industries3").on("optionadded.bs.multiselect", function (event) {
     logEvent(event);
   });
