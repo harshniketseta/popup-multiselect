@@ -352,12 +352,24 @@
   };
 
   MultiSelect.prototype.addOption = function (attributes) {
-    //{value: "AGRICULTURE", selected: true, html: "AGRICULTURE"}) eg. for attributes.
-    var jOption = $("<option></option>", attributes);
-    this.$element.append(jOption);
 
-    var optionObj = new MultiSelect.Option(jOption, this.getOptionConfig());
+    var jOption = $("<option></option>", attributes)
+      , optionObj = new MultiSelect.Option(jOption, this.getOptionConfig())
+      , e = null
+      ;
+
+    e = $.Event('addingoption.bs.' + this.type);
+    this.$element.trigger(e, optionObj);
+
+    if (e.isDefaultPrevented()) {
+      return;
+    }
+
+    this.$element.append(jOption);
     this.$selectOptions.push(optionObj);
+
+    e = $.Event('optionadded.bs.' + this.type);
+    this.$element.trigger(e, optionObj);
 
     if (jOption.prop("selected")) {
       this.optionSelected(optionObj);
@@ -381,7 +393,7 @@
   };
 
   MultiSelect.prototype.enable = function () {
-    if(this.enabled){
+    if (this.enabled) {
       return;
     }
 
@@ -394,7 +406,7 @@
   };
 
   MultiSelect.prototype.disable = function () {
-    if(!this.enabled){
+    if (!this.enabled) {
       return;
     }
 
