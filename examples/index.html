@@ -368,7 +368,8 @@
         </div>
       </div>
     </div>
-
+  </section>
+  <section id="main_content" class="inner">
     <div>
       <div id="fb-root">
       </div>
@@ -379,7 +380,8 @@
         data-show-faces="true">
       </div>
     </div>
-    <div style="margin-top: 10px;"><a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="popupMultiSelect">Tweet</a></div>
+    <div style="margin-top: 10px;"><a href="https://twitter.com/share" class="twitter-share-button"
+                                      data-hashtags="popupMultiSelect">Tweet</a></div>
   </section>
 </div>
 
@@ -422,7 +424,7 @@
     window.fbCheck = setInterval(addFBEventListeners, 100);
 
     function addtwttrEventListeners() {
-      if(typeof twttr !== 'undefined'){
+      if (typeof twttr !== 'undefined') {
         clearInterval(window.twttrCheck);
         twttr.ready(function (twttr) {
           twttr.events.bind('tweet', track_tweet);
