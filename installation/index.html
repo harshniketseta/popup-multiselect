@@ -15,6 +15,27 @@
 
 <body>
 
+<script>
+  window.fbAsyncInit = function () {
+    FB.init({
+      appId: '1593808987559038',
+      xfbml: true,
+      version: 'v2.3'
+    });
+  };
+
+  (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {
+      return;
+    }
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
 <!-- HEADER -->
 <div id="header_wrap" class="outer">
   <header class="inner">
@@ -64,6 +85,18 @@
     <pre><code>dist/stylesheets/multiselect.min.css</code></pre>
 
     <p>Check examples to know how to initialize the multiselect.</p>
+
+    <div>
+      <div id="fb-root">
+      </div>
+      <div
+        class="fb-like"
+        data-share="true"
+        data-width="450"
+        data-show-faces="true">
+      </div>
+    </div>
+    <div style="margin-top: 10px;"><a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="popupMultiSelect">Tweet</a></div>
   </section>
 </div>
 
@@ -93,6 +126,40 @@
     $(".zip_download_link").on("click", function () {
       ga && ga('send', 'event', 'zip_download_link', 'click');
     });
+
+    function addFBEventListeners() {
+      if (typeof FB !== 'undefined') {
+        clearInterval(window.fbCheck);
+        FB.Event.subscribe('edge.create', function (targetUrl) {
+          ga('send', 'social', 'facebook', 'like', targetUrl);
+        });
+      }
+    };
+
+    window.fbCheck = setInterval(addFBEventListeners, 100);
+
+    function addtwttrEventListeners() {
+      if(typeof twttr !== 'undefined'){
+        clearInterval(window.twttrCheck);
+        twttr.ready(function (twttr) {
+          twttr.events.bind('tweet', track_tweet);
+        });
+      }
+    }
+
+    window.twttrCheck = setInterval(addtwttrEventListeners, 100);
+
+    function track_tweet(event) {
+      if (event) {
+        ga('send', {
+          'hitType': 'social',
+          'socialNetwork': 'Twitter',
+          'socialAction': 'Tweet',
+          'socialTarget': 'harshniketseta.github.io/popupMultiSelect/',
+          'page': '/installation'
+        });
+      }
+    }
   });
 
 
@@ -105,3 +172,5 @@
   ga('send', 'pageview');
 
 </script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>

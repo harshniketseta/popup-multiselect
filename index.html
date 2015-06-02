@@ -125,7 +125,8 @@
         data-show-faces="true">
       </div>
     </div>
-    <div style="margin-top: 10px;"><a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="popupMultiSelect">Tweet</a></div>
+    <div style="margin-top: 10px;"><a href="https://twitter.com/share" class="twitter-share-button"
+                                      data-hashtags="popupMultiSelect">Tweet</a></div>
   </section>
 </div>
 <!-- FOOTER  -->
@@ -154,6 +155,40 @@
     $(".zip_download_link").on("click", function () {
       ga && ga('send', 'event', 'zip_download_link', 'click');
     });
+
+    function addFBEventListeners() {
+      if (typeof FB !== 'undefined') {
+        clearInterval(window.fbCheck);
+        FB.Event.subscribe('edge.create', function (targetUrl) {
+          ga('send', 'social', 'facebook', 'like', targetUrl);
+        });
+      }
+    };
+
+    window.fbCheck = setInterval(addFBEventListeners, 100);
+
+    function addtwttrEventListeners() {
+      if(typeof twttr !== 'undefined'){
+        clearInterval(window.twttrCheck);
+        twttr.ready(function (twttr) {
+          twttr.events.bind('tweet', track_tweet);
+        });
+      }
+    }
+
+    window.twttrCheck = setInterval(addtwttrEventListeners, 100);
+
+    function track_tweet(event) {
+      if (event) {
+        ga('send', {
+          'hitType': 'social',
+          'socialNetwork': 'Twitter',
+          'socialAction': 'Tweet',
+          'socialTarget': 'harshniketseta.github.io/popupMultiSelect/',
+          'page': '/'
+        });
+      }
+    }
   });
 
   (function (i, s, o, g, r, a, m) {
