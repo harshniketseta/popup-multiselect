@@ -14,6 +14,26 @@
 </head>
 
 <body>
+<script>
+  window.fbAsyncInit = function () {
+    FB.init({
+      appId: '1593808987559038',
+      xfbml: true,
+      version: 'v2.3'
+    });
+  };
+
+  (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {
+      return;
+    }
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
 
 <!-- HEADER -->
 <div id="header_wrap" class="outer">
@@ -94,9 +114,20 @@
         src="/popupMultiSelect/images/5_selected_options.png" alt="alt tag"
         style="max-width:100%;"></a></p>
     </article>
+
+    <div>
+      <div id="fb-root">
+      </div>
+      <div
+        class="fb-like"
+        data-share="true"
+        data-width="450"
+        data-show-faces="true">
+      </div>
+    </div>
+    <div style="margin-top: 10px;"><a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="popupMultiSelect">Tweet</a></div>
   </section>
 </div>
-
 <!-- FOOTER  -->
 <div id="footer_wrap" class="outer">
   <footer class="inner">
@@ -125,12 +156,20 @@
     });
   });
 
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
   ga('create', 'UA-63624467-1', 'auto');
   ga('send', 'pageview');
-
 </script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
