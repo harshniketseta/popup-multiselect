@@ -414,7 +414,25 @@
     });
 
     $("#forkme_banner").on("click", function(){
-      ga && ga('send', 'event', 'link', 'click', 'view_on_github');
+      event.preventDefault();
+
+      var jHref = $(this)
+        , href = jHref.attr("href")
+        ;
+
+      var t = setTimeout('window.location = ' + href, 250);
+
+      // send data to GA:
+      ga && ga('send', {
+        'hitType': 'event',
+        'eventCategory': 'link',
+        'eventAction': 'click',
+        'eventLabel': 'view_on_github',
+        'hitCallback': function () {
+          clearTimeout(t);
+          window.location = href;
+        }
+      });
     });
 
     function addFBEventListeners() {
