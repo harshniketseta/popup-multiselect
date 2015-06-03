@@ -150,10 +150,15 @@
   $(document).ready(function () {
 
     $(".tar_download_link").on("click", function () {
-      ga && ga('send', 'event', 'tar_download_link', 'click');
+      ga && ga('send', 'event', 'link', 'click', 'tar_download_link');
     });
+
     $(".zip_download_link").on("click", function () {
-      ga && ga('send', 'event', 'zip_download_link', 'click');
+      ga && ga('send', 'event', 'link', 'click', 'zip_download_link');
+    });
+
+    $("#forkme_banner").on("click", function(){
+      ga && ga('send', 'event', 'link', 'click', 'view_on_github');
     });
 
     function addFBEventListeners() {
@@ -168,7 +173,7 @@
     window.fbCheck = setInterval(addFBEventListeners, 100);
 
     function addtwttrEventListeners() {
-      if(typeof twttr !== 'undefined'){
+      if (typeof twttr !== 'undefined') {
         clearInterval(window.twttrCheck);
         twttr.ready(function (twttr) {
           twttr.events.bind('tweet', track_tweet);
@@ -207,4 +212,12 @@
   ga('send', 'pageview');
 </script>
 
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<script>!function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+  if (!d.getElementById(id)) {
+    js = d.createElement(s);
+    js.id = id;
+    js.src = p + '://platform.twitter.com/widgets.js';
+    fjs.parentNode.insertBefore(js, fjs);
+  }
+}(document, 'script', 'twitter-wjs');</script>

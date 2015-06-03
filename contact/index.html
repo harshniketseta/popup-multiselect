@@ -108,8 +108,13 @@
     $(".tar_download_link").on("click", function(){
       ga && ga('send', 'event', 'tar_download_link', 'click');
     });
+
     $(".zip_download_link").on("click", function(){
       ga && ga('send', 'event', 'zip_download_link', 'click');
+    });
+
+    $("#forkme_banner").on("click", function(){
+      ga && ga('send', 'event', 'link', 'click', 'view_on_github');
     });
 
     $(".mailTo").on("click", function (event) {
@@ -120,17 +125,16 @@
         , href = jHref.attr("href")
         ;
 
-      // register safety net timeout:
       var t = setTimeout('window.location = ' + href, 250);
 
       // send data to GA:
       ga && ga('send', {
         'hitType': 'event',
-        'eventCategory': 'mailto',
+        'eventCategory': 'link',
         'eventAction': 'click',
+        'eventLabel': 'mailto',
         'hitCallback': function () {
           clearTimeout(t);
-          // redirect:
           window.location = href;
         }
       });

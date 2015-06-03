@@ -408,8 +408,13 @@
     $(".tar_download_link").on("click", function () {
       ga && ga('send', 'event', 'tar_download_link', 'click');
     });
+
     $(".zip_download_link").on("click", function () {
       ga && ga('send', 'event', 'zip_download_link', 'click');
+    });
+
+    $("#forkme_banner").on("click", function(){
+      ga && ga('send', 'event', 'link', 'click', 'view_on_github');
     });
 
     function addFBEventListeners() {
