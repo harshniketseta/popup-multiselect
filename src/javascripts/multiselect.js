@@ -4,8 +4,8 @@
  * Popup Multi Select
  * Created By Harshniket Seta
  * Currently maintained by harshniketseta [at] gmail [dot] com
- * Version: 0.2.0
- * Release: 2015-05-31
+ * Version: 1.0.2
+ * Release: 2015-06-09
  * ======================================================================== */
 
 (function ($) {
@@ -505,7 +505,7 @@
     if (!this.$tip) {
       this.$tip = $(this.options.modalOptionTemplate);
 
-      this.$tip.find(".option-text").html(this.$element.html());
+      this.$tip.find(".option-text").html(this.$element.text());
       if (!this.enabled) this.$tip.addClass("disabled");
 
       if (this.isSelected()) {
