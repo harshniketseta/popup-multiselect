@@ -128,7 +128,7 @@
 <!-- FOOTER  -->
 <div id="footer_wrap" class="outer">
   <footer class="inner">
-    <p class="copyright">Popupmultiselect maintained by <a href="https://github.com/harshniketseta">harshniketseta</a>
+    <p class="copyright">Popupmultiselect maintained by harshniketseta (<a id="goToGithub" href="https://github.com/harshniketseta">GitHub</a>/<a id="goToLinkedin" href="https://www.linkedin.com/profile/view?id=59109284&trk=hp-identity-name">LinkedIn</a>)
     </p>
 
     <p class="copyright">Popupmultiselect designed by <a href="https://www.behance.net/sokratus">sokratus</a></p>
@@ -159,7 +159,9 @@
         , href = jHref.attr("href")
         ;
 
-      var t = setTimeout('window.location = ' + href, 250);
+      var t = setTimeout(function(){
+        window.location = href;
+      }, 250);
 
       // send data to GA:
       ga && ga('send', {
