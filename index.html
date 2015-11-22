@@ -1,243 +1,146 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Popupmultiselect : A popup with options. Allows multi select. Based on Bootstrap.">
 
-<head>
-  <meta charset='utf-8'>
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
-  <meta name="description" content="Popupmultiselect : A popup with options. Allows multi select. Based on Bootstrap.">
+    <link rel="stylesheet" type="text/css" media="screen" href="/popupMultiSelect/stylesheets/stylesheet.css">
+    
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/popupMultiSelect/javascripts/index.js"></script>
+    <title>Popupmultiselect</title>
+  </head>
 
-  <link rel="stylesheet" type="text/css" media="screen" href="/popupMultiSelect/stylesheets/stylesheet.css">
+  <body>
+    <script>
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: '1593808987559038',
+          xfbml: true,
+          version: 'v2.3'
+        });
+      };
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+          return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
 
-  <title>Popupmultiselect</title>
-</head>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+      <header class="inner">
+        <a data-event-label="fork_me_banner" id="forkme_banner" href="https://github.com/harshniketseta/popupMultiSelect">View on GitHub</a>
 
-<body>
-<script>
-  window.fbAsyncInit = function () {
-    FB.init({
-      appId: '1593808987559038',
-      xfbml: true,
-      version: 'v2.3'
-    });
-  };
+        <a href="/popupMultiSelect"><h1 id="project_title">Popupmultiselect</h1></a>
 
-  (function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {
-      return;
-    }
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
+        <h2 id="project_tagline">A popup with options. Allows multi select. Based on Bootstrap.</h2>
 
-<!-- HEADER -->
-<div id="header_wrap" class="outer">
-  <header class="inner">
-    <a id="forkme_banner" href="https://github.com/harshniketseta/popupMultiSelect">View on GitHub</a>
-
-    <a href="/popupMultiSelect"><h1 id="project_title">Popupmultiselect</h1></a>
-
-    <h2 id="project_tagline">A popup with options. Allows multi select. Based on Bootstrap.</h2>
-
-    <section id="downloads">
-      <a class="zip_download_link" href="https://github.com/harshniketseta/popupMultiSelect/zipball/master">Download
-        this project as a .zip file</a>
-      <a class="tar_download_link" href="https://github.com/harshniketseta/popupMultiSelect/tarball/master">Download
-        this project as a tar.gz file</a>
-    </section>
-  </header>
-</div>
-
-<!-- MAIN CONTENT -->
-<div id="main_content_wrap" class="outer">
-  <section id="main_content" class="inner">
-    <h3><a id="welcome-to-popupMultiSelect" class="anchor" href="#welcome-to-popupMultiSelect" aria-hidden="true"><span
-      class="octicon octicon-link"></span></a>Welcome to popupMultiSelect.</h3>
-
-    <ul id="navlist">
-      <li class="active"><a href="/popupMultiSelect">Home</a></li>
-      <li><a href="/popupMultiSelect/installation">Installation</a></li>
-      <li><a href="/popupMultiSelect/actions">Actions</a></li>
-      <li><a href="/popupMultiSelect/events">Events</a></li>
-      <li><a href="/popupMultiSelect/examples">Examples</a></li>
-      <li><a href="/popupMultiSelect/about">About</a></li>
-      <li><a href="/popupMultiSelect/contact">Contact</a></li>
-    </ul>
-
-    <article class="markdown-body entry-content" itemprop="mainContentOfPage">
-
-      <h2><a id="user-content-screenshots" class="anchor" href="#screenshots" aria-hidden="true"><span
-        class="octicon octicon-link"></span></a>Screenshots</h2>
-
-      <h3><a id="user-content-on-init" class="anchor" href="#on-init" aria-hidden="true"><span
-        class="octicon octicon-link"></span></a>On Init</h3>
-
-      <p><a href="/popupMultiSelect/images/1_on_init.png"
-            target="_blank"><img
-        src="/popupMultiSelect/images/1_on_init.png" alt="alt tag"
-        style="max-width:100%;"></a></p>
-
-      <h3><a id="user-content-on-open" class="anchor" href="#on-open" aria-hidden="true"><span
-        class="octicon octicon-link"></span></a>On Open</h3>
-
-      <p><a href="/popupMultiSelect/images/2_on_open.png"
-            target="_blank"><img
-        src="/popupMultiSelect/images/2_on_open.png" alt="alt tag"
-        style="max-width:100%;"></a></p>
-
-      <h3><a id="user-content-on-selection-of-options" class="anchor" href="#on-selection-of-options"
-             aria-hidden="true"><span class="octicon octicon-link"></span></a>On Selection of Options</h3>
-
-      <p><a href="/popupMultiSelect/images/3_on_select.png"
-            target="_blank"><img
-        src="/popupMultiSelect/images/3_on_select.png" alt="alt tag"
-        style="max-width:100%;"></a></p>
-
-      <h3><a id="user-content-all-options-selected" class="anchor" href="#all-options-selected" aria-hidden="true"><span
-        class="octicon octicon-link"></span></a>All Options Selected</h3>
-
-      <p><a href="/popupMultiSelect/images/4_on_select_complete.png"
-            target="_blank"><img
-        src="/popupMultiSelect/images/4_on_select_complete.png"
-        alt="alt tag" style="max-width:100%;"></a></p>
-
-      <h3><a id="user-content-display-of-selected-options" class="anchor" href="#display-of-selected-options"
-             aria-hidden="true"><span class="octicon octicon-link"></span></a>Display of Selected Options</h3>
-
-      <p><a href="/popupMultiSelect/images/5_selected_options.png"
-            target="_blank"><img
-        src="/popupMultiSelect/images/5_selected_options.png" alt="alt tag"
-        style="max-width:100%;"></a></p>
-    </article>
-
-    <div>
-      <div id="fb-root">
-      </div>
-      <div
-        class="fb-like"
-        data-share="true"
-        data-width="450"
-        data-show-faces="true">
-      </div>
+        <section id="downloads">
+          <a class="zip_download_link" href="https://github.com/harshniketseta/popupMultiSelect/zipball/master">Download
+            this project as a .zip file</a>
+          <a class="tar_download_link" href="https://github.com/harshniketseta/popupMultiSelect/tarball/master">Download
+            this project as a tar.gz file</a>
+        </section>
+      </header>
     </div>
-    <div style="margin-top: 10px;"><a href="https://twitter.com/share" class="twitter-share-button"
-                                      data-hashtags="popupMultiSelect">Tweet</a></div>
-  </section>
-</div>
-<!-- FOOTER  -->
-<div id="footer_wrap" class="outer">
-  <footer class="inner">
-    <p class="copyright">Popupmultiselect maintained by harshniketseta (<a id="goToGithub" href="https://github.com/harshniketseta">GitHub</a>/<a id="goToLinkedin" href="https://www.linkedin.com/profile/view?id=59109284&trk=hp-identity-name">LinkedIn</a>)
-    </p>
 
-    <p class="copyright">Popupmultiselect designed by <a href="https://www.behance.net/sokratus">sokratus</a></p>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3><a id="welcome-to-popupMultiSelect" class="anchor" href="#welcome-to-popupMultiSelect" aria-hidden="true"><span
+          class="octicon octicon-link"></span></a>Welcome to popupMultiSelect.</h3>
 
-    <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
-  </footer>
-</div>
+        <ul id="navlist">
+          <li class="active"><a href="/popupMultiSelect">Home</a></li>
+          <li><a href="/popupMultiSelect/installation">Installation</a></li>
+          <li><a href="/popupMultiSelect/actions">Actions</a></li>
+          <li><a href="/popupMultiSelect/events">Events</a></li>
+          <li><a href="/popupMultiSelect/examples">Examples</a></li>
+          <li><a href="/popupMultiSelect/about">About</a></li>
+          <li><a href="/popupMultiSelect/contact">Contact</a></li>
+        </ul>
 
+        <article class="markdown-body entry-content" itemprop="mainContentOfPage">
 
-</body>
+          <h2><a id="user-content-screenshots" class="anchor" href="#screenshots" aria-hidden="true"><span
+            class="octicon octicon-link"></span></a>Screenshots</h2>
+
+          <h3><a id="user-content-on-init" class="anchor" href="#on-init" aria-hidden="true"><span
+            class="octicon octicon-link"></span></a>On Init</h3>
+
+          <p><a href="/popupMultiSelect/images/1_on_init.png"
+                target="_blank"><img
+            src="/popupMultiSelect/images/1_on_init.png" alt="alt tag"
+            style="max-width:100%;"></a></p>
+
+          <h3><a id="user-content-on-open" class="anchor" href="#on-open" aria-hidden="true"><span
+            class="octicon octicon-link"></span></a>On Open</h3>
+
+          <p><a href="/popupMultiSelect/images/2_on_open.png"
+                target="_blank"><img
+            src="/popupMultiSelect/images/2_on_open.png" alt="alt tag"
+            style="max-width:100%;"></a></p>
+
+          <h3><a id="user-content-on-selection-of-options" class="anchor" href="#on-selection-of-options"
+                 aria-hidden="true"><span class="octicon octicon-link"></span></a>On Selection of Options</h3>
+
+          <p><a href="/popupMultiSelect/images/3_on_select.png"
+                target="_blank"><img
+            src="/popupMultiSelect/images/3_on_select.png" alt="alt tag"
+            style="max-width:100%;"></a></p>
+
+          <h3><a id="user-content-all-options-selected" class="anchor" href="#all-options-selected" aria-hidden="true"><span
+            class="octicon octicon-link"></span></a>All Options Selected</h3>
+
+          <p><a href="/popupMultiSelect/images/4_on_select_complete.png"
+                target="_blank"><img
+            src="/popupMultiSelect/images/4_on_select_complete.png"
+            alt="alt tag" style="max-width:100%;"></a></p>
+
+          <h3><a id="user-content-display-of-selected-options" class="anchor" href="#display-of-selected-options"
+                 aria-hidden="true"><span class="octicon octicon-link"></span></a>Display of Selected Options</h3>
+
+          <p><a href="/popupMultiSelect/images/5_selected_options.png"
+                target="_blank"><img
+            src="/popupMultiSelect/images/5_selected_options.png" alt="alt tag"
+            style="max-width:100%;"></a></p>
+        </article>
+
+        <div>
+          <div id="fb-root">
+          </div>
+          <div
+            class="fb-like"
+            data-share="true"
+            data-width="450"
+            data-show-faces="true">
+          </div>
+        </div>
+        <div style="margin-top: 10px;"><a href="https://twitter.com/share" class="twitter-share-button"
+                                          data-hashtags="popupMultiSelect">Tweet</a></div>
+      </section>
+    </div>
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Popupmultiselect maintained by harshniketseta (<a data-event-label="goto_github" id="goToGithub" href="https://github.com/harshniketseta">GitHub</a>/<a data-event-label="goto_linkedin" id="goToLinkedin" href="https://www.linkedin.com/profile/view?id=59109284&trk=hp-identity-name">LinkedIn</a>)
+        </p>
+
+        <p class="copyright">Popupmultiselect designed by <a href="https://www.behance.net/sokratus">sokratus</a></p>
+
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+  </body>
 </html>
 
-
-<script>
-  $(document).ready(function () {
-
-    $(".tar_download_link").on("click", function () {
-      ga && ga('send', 'event', 'link', 'click', 'tar_download_link');
-    });
-
-    $(".zip_download_link").on("click", function () {
-      ga && ga('send', 'event', 'link', 'click', 'zip_download_link');
-    });
-
-    $("#forkme_banner").on("click", function(){
-      event.preventDefault();
-
-      var jHref = $(this)
-        , href = jHref.attr("href")
-        ;
-
-      var t = setTimeout(function(){
-        window.location = href;
-      }, 250);
-
-      // send data to GA:
-      ga && ga('send', {
-        'hitType': 'event',
-        'eventCategory': 'link',
-        'eventAction': 'click',
-        'eventLabel': 'view_on_github',
-        'hitCallback': function () {
-          clearTimeout(t);
-          window.location = href;
-        }
-      });
-    });
-
-    function addFBEventListeners() {
-      if (typeof FB !== 'undefined') {
-        clearInterval(window.fbCheck);
-        FB.Event.subscribe('edge.create', function (targetUrl) {
-          ga('send', 'social', 'facebook', 'like', targetUrl);
-        });
-      }
-    };
-
-    window.fbCheck = setInterval(addFBEventListeners, 100);
-
-    function addtwttrEventListeners() {
-      if (typeof twttr !== 'undefined') {
-        clearInterval(window.twttrCheck);
-        twttr.ready(function (twttr) {
-          twttr.events.bind('tweet', track_tweet);
-        });
-      }
-    }
-
-    window.twttrCheck = setInterval(addtwttrEventListeners, 100);
-
-    function track_tweet(event) {
-      if (event) {
-        ga('send', {
-          'hitType': 'social',
-          'socialNetwork': 'Twitter',
-          'socialAction': 'Tweet',
-          'socialTarget': 'harshniketseta.github.io/popupMultiSelect/',
-          'page': '/'
-        });
-      }
-    }
-  });
-
-  (function (i, s, o, g, r, a, m) {
-    i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function () {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date();
-    a = s.createElement(o),
-      m = s.getElementsByTagName(o)[0];
-    a.async = 1;
-    a.src = g;
-    m.parentNode.insertBefore(a, m)
-  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-  ga('create', 'UA-63624467-1', 'auto');
-  ga('send', 'pageview');
-</script>
-
-<script>!function (d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
-  if (!d.getElementById(id)) {
-    js = d.createElement(s);
-    js.id = id;
-    js.src = p + '://platform.twitter.com/widgets.js';
-    fjs.parentNode.insertBefore(js, fjs);
-  }
-}(document, 'script', 'twitter-wjs');</script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>

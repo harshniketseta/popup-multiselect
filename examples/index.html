@@ -1,489 +1,400 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Popupmultiselect : A popup with options. Allows multi select. Based on Bootstrap.">
 
-<head>
-  <meta charset='utf-8'>
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
-  <meta name="description" content="Popupmultiselect : A popup with options. Allows multi select. Based on Bootstrap.">
+    <link rel="stylesheet" type="text/css" media="screen" href="/popupMultiSelect/stylesheets/stylesheet.css">
 
-  <link rel="stylesheet" type="text/css" media="screen" href="/popupMultiSelect/stylesheets/stylesheet.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" media="all" href="/popupMultiSelect/dist/stylesheets/multiselect.min.css">
 
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-  <link rel="stylesheet" media="all" href="/popupMultiSelect/dist/stylesheets/multiselect.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
-  <!-- Latest compiled JavaScript -->
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="/popupMultiSelect/dist/javascripts/multiselect.min.js"></script>
+    <script src="/popupMultiSelect/javascripts/main.js"></script>
+    <script src="/popupMultiSelect/javascripts/index.js"></script>
+    <title>Popupmultiselect</title>
+  </head>
+  
+  <body>
+    <script>
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: '1593808987559038',
+          xfbml: true,
+          version: 'v2.3'
+        });
+      };
 
-  <script src="/popupMultiSelect/dist/javascripts/multiselect.min.js"></script>
-  <script src="/popupMultiSelect/javascripts/main.js"></script>
-
-  <title>Popupmultiselect</title>
-</head>
-
-<body>
-
-<script>
-  window.fbAsyncInit = function () {
-    FB.init({
-      appId: '1593808987559038',
-      xfbml: true,
-      version: 'v2.3'
-    });
-  };
-
-  (function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {
-      return;
-    }
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<!-- HEADER -->
-<div id="header_wrap" class="outer">
-  <header class="inner">
-    <a id="forkme_banner" href="https://github.com/harshniketseta/popupMultiSelect">View on GitHub</a>
-
-    <a href="/popupMultiSelect"><h1 id="project_title">Popupmultiselect</h1></a>
-
-    <h2 id="project_tagline">A popup with options. Allows multi select. Based on Bootstrap.</h2>
-
-    <h3 style="color: white;">Examples</h3>
-    <section id="downloads">
-      <a class="zip_download_link" href="https://github.com/harshniketseta/popupMultiSelect/zipball/master">Download
-        this project as a .zip file</a>
-      <a class="tar_download_link" href="https://github.com/harshniketseta/popupMultiSelect/tarball/master">Download
-        this project as a tar.gz file</a>
-    </section>
-  </header>
-</div>
-
-<!-- MAIN CONTENT -->
-<div id="main_content_wrap" class="outer">
-  <section id="main_content" class="inner">
-    <ul id="navlist">
-      <li><a href="/popupMultiSelect">Home</a></li>
-      <li><a href="/popupMultiSelect/installation">Installation</a></li>
-      <li><a href="/popupMultiSelect/actions">Actions</a></li>
-      <li><a href="/popupMultiSelect/events">Events</a></li>
-      <li class="active"><a href="/popupMultiSelect/examples">Examples</a></li>
-      <li><a href="/popupMultiSelect/about">About</a></li>
-      <li><a href="/popupMultiSelect/contact">Contact</a></li>
-    </ul>
-  </section>
-
-  <section>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="col-lg-12 text-center">
-            <h4>Basic Example</h4>
-          </div>
-
-          <div class="col-lg-12">
-            <select multiple name="company[industries]" id="industries1">
-              <option value="AGRICULTURE" selected>AGRICULTURE</option>
-              <option value="GROCERY">GROCERY</option>
-              <option value="ACCOUNTING">ACCOUNTING</option>
-              <option value="HEALTH CARE">HEALTH CARE</option>
-              <option value="ADVERTISING">ADVERTISING</option>
-              <option value="INTERNET PUBLISHING">INTERNET PUBLISHING</option>
-              <option value="AEROSPACE">AEROSPACE</option>
-              <option value="INVESTMENT BANKING">INVESTMENT BANKING</option>
-              <option value="AIRCRAFT">AIRCRAFT</option>
-              <option value="LEGAL">LEGAL</option>
-              <option value="AIRLINE">AIRLINE</option>
-              <option value="MANUFACTURING">MANUFACTURING</option>
-              <option value="APPAREL & ACCESSORIES">APPAREL & ACCESSORIES</option>
-              <option value="MOTION PICTURE & VIDEO">MOTION PICTURE & VIDEO</option>
-              <option value="AUTOMOTIVE">AUTOMOTIVE</option>
-              <option value="MUSIC">MUSIC</option>
-              <option value="BANKING">BANKING</option>
-              <option value="NEWSPAPER PUBLISHERS">NEWSPAPER PUBLISHERS</option>
-              <option value="BROADCASTING">BROADCASTING</option>
-              <option value="ONLINE AUCTIONS">ONLINE AUCTIONS</option>
-              <option value="BROKERAGE">BROKERAGE</option>
-              <option value="PENSION FUNDS">PENSION FUNDS</option>
-              <option value="BIOTECHNOLOGY">BIOTECHNOLOGY</option>
-              <option value="PHARMACEUTICALS">PHARMACEUTICALS</option>
-              <option value="CALL CENTERS">CALL CENTERS</option>
-              <option value="PRIVATE EQUITY">PRIVATE EQUITY</option>
-              <option value="CARGO HANDLING">CARGO HANDLING</option>
-              <option value="PUBLISHING">PUBLISHING</option>
-              <option value="CHEMICAL">CHEMICAL</option>
-              <option value="REAL ESTATE">REAL ESTATE</option>
-              <option value="COMPUTER">COMPUTER</option>
-              <option value="RETAIL & WHOLESALE">RETAIL & WHOLESALE</option>
-              <option value="CONSULTING">CONSULTING</option>
-              <option value="SECURITIES & COMMODITY EXCHANGES">SECURITIES & COMMODITY EXCHANGES</option>
-              <option value="CONSUMER PRODUCTS">CONSUMER PRODUCTS</option>
-              <option value="SERVICE">SERVICE</option>
-              <option value="COSMETICS">COSMETICS</option>
-              <option value="SOAP & DETERGENT">SOAP & DETERGENT</option>
-              <option value="DEFENSE">DEFENSE</option>
-              <option value="SOFTWARE">SOFTWARE</option>
-              <option value="DEPARTMENT STORES">DEPARTMENT STORES</option>
-              <option value="SPORTS">SPORTS</option>
-              <option value="EDUCATION">EDUCATION</option>
-              <option value="TECHNOLOGY">TECHNOLOGY</option>
-              <option value="ELECTRONICS">ELECTRONICS</option>
-              <option value="TELECOMMUNICATIONS">TELECOMMUNICATIONS</option>
-              <option value="ENERGY">ENERGY</option>
-              <option value="TELEVISION">TELEVISION</option>
-              <option value="ENTERTAINMENT & LEISURE">ENTERTAINMENT & LEISURE</option>
-              <option value="TRANSPORTATION">TRANSPORTATION</option>
-              <option value="EXECUTIVE SEARCH">EXECUTIVE SEARCH</option>
-              <option value="TRUCKING">TRUCKING</option>
-              <option value="FINANCIAL SERVICES">FINANCIAL SERVICES</option>
-              <option value="VENTURE CAPITAL">VENTURE CAPITAL</option>
-              <option value="FOOD, BEVERAGE & TOBACCO" selected>FOOD, BEVERAGE & TOBACCO</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <h4>Code</h4>
-              <pre><code>$("#industries1").multiselect({title: "Select Industry",
-                maxSelectionAllowed: 5});</code></pre>
-
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="col-lg-12 text-center">
-            <h4>Basic Example (Disabled)</h4>
-          </div>
-          <div class="col-lg-12">
-            <select multiple name="company[industries]" id="industries2" disabled>
-              <option value="AGRICULTURE" selected>AGRICULTURE</option>
-              <option value="GROCERY">GROCERY</option>
-              <option value="ACCOUNTING">ACCOUNTING</option>
-              <option value="HEALTH CARE">HEALTH CARE</option>
-              <option value="ADVERTISING">ADVERTISING</option>
-              <option value="INTERNET PUBLISHING">INTERNET PUBLISHING</option>
-              <option value="AEROSPACE">AEROSPACE</option>
-              <option value="INVESTMENT BANKING">INVESTMENT BANKING</option>
-              <option value="AIRCRAFT">AIRCRAFT</option>
-              <option value="LEGAL">LEGAL</option>
-              <option value="AIRLINE">AIRLINE</option>
-              <option value="MANUFACTURING">MANUFACTURING</option>
-              <option value="APPAREL & ACCESSORIES">APPAREL & ACCESSORIES</option>
-              <option value="MOTION PICTURE & VIDEO">MOTION PICTURE & VIDEO</option>
-              <option value="AUTOMOTIVE">AUTOMOTIVE</option>
-              <option value="MUSIC">MUSIC</option>
-              <option value="BANKING">BANKING</option>
-              <option value="NEWSPAPER PUBLISHERS">NEWSPAPER PUBLISHERS</option>
-              <option value="BROADCASTING">BROADCASTING</option>
-              <option value="ONLINE AUCTIONS">ONLINE AUCTIONS</option>
-              <option value="BROKERAGE">BROKERAGE</option>
-              <option value="PENSION FUNDS">PENSION FUNDS</option>
-              <option value="BIOTECHNOLOGY">BIOTECHNOLOGY</option>
-              <option value="PHARMACEUTICALS">PHARMACEUTICALS</option>
-              <option value="CALL CENTERS">CALL CENTERS</option>
-              <option value="PRIVATE EQUITY">PRIVATE EQUITY</option>
-              <option value="CARGO HANDLING">CARGO HANDLING</option>
-              <option value="PUBLISHING">PUBLISHING</option>
-              <option value="CHEMICAL">CHEMICAL</option>
-              <option value="REAL ESTATE">REAL ESTATE</option>
-              <option value="COMPUTER">COMPUTER</option>
-              <option value="RETAIL & WHOLESALE">RETAIL & WHOLESALE</option>
-              <option value="CONSULTING">CONSULTING</option>
-              <option value="SECURITIES & COMMODITY EXCHANGES">SECURITIES & COMMODITY EXCHANGES</option>
-              <option value="CONSUMER PRODUCTS">CONSUMER PRODUCTS</option>
-              <option value="SERVICE">SERVICE</option>
-              <option value="COSMETICS">COSMETICS</option>
-              <option value="SOAP & DETERGENT">SOAP & DETERGENT</option>
-              <option value="DEFENSE">DEFENSE</option>
-              <option value="SOFTWARE">SOFTWARE</option>
-              <option value="DEPARTMENT STORES">DEPARTMENT STORES</option>
-              <option value="SPORTS">SPORTS</option>
-              <option value="EDUCATION">EDUCATION</option>
-              <option value="TECHNOLOGY">TECHNOLOGY</option>
-              <option value="ELECTRONICS">ELECTRONICS</option>
-              <option value="TELECOMMUNICATIONS">TELECOMMUNICATIONS</option>
-              <option value="ENERGY">ENERGY</option>
-              <option value="TELEVISION">TELEVISION</option>
-              <option value="ENTERTAINMENT & LEISURE">ENTERTAINMENT & LEISURE</option>
-              <option value="TRANSPORTATION">TRANSPORTATION</option>
-              <option value="EXECUTIVE SEARCH">EXECUTIVE SEARCH</option>
-              <option value="TRUCKING">TRUCKING</option>
-              <option value="FINANCIAL SERVICES">FINANCIAL SERVICES</option>
-              <option value="VENTURE CAPITAL">VENTURE CAPITAL</option>
-              <option value="FOOD, BEVERAGE & TOBACCO" selected>FOOD, BEVERAGE & TOBACCO</option>
-            </select>
-          </div>
-
-          <div class="col-lg-12 buttonWrap">
-            <input type="button" value="Enable" class="enable2 btn btn-success"/>
-            <input type="button" value="Disable" class="disable2 btn btn-danger"/>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <h4>Code to enable</h4>
-            <pre><code>$("input.enable").on("click", function(){
-              $("#industries2").multiselect("enable");
-              });
-            </code></pre>
-          <h4>Code to disable</h4>
-          <pre><code>$("input.disable").on("click", function(){
-            $("#industries2").multiselect("disable");
-            });</code></pre>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="col-lg-12 text-center">
-            <h4>Basic Example (Action and Events)</h4>
-          </div>
-          <div class="col-lg-12">
-            <select multiple name="company[industries]" id="industries3">
-              <option value="AGRICULTURE">AGRICULTURE</option>
-              <option value="GROCERY">GROCERY</option>
-              <option value="ACCOUNTING">ACCOUNTING</option>
-              <option value="HEALTH CARE">HEALTH CARE</option>
-              <option value="ADVERTISING">ADVERTISING</option>
-              <option value="INTERNET PUBLISHING">INTERNET PUBLISHING</option>
-              <option value="AEROSPACE">AEROSPACE</option>
-              <option value="INVESTMENT BANKING">INVESTMENT BANKING</option>
-              <option value="AIRCRAFT">AIRCRAFT</option>
-              <option value="LEGAL">LEGAL</option>
-              <option value="AIRLINE">AIRLINE</option>
-              <option value="MANUFACTURING">MANUFACTURING</option>
-              <option value="APPAREL & ACCESSORIES">APPAREL & ACCESSORIES</option>
-              <option value="MOTION PICTURE & VIDEO">MOTION PICTURE & VIDEO</option>
-              <option value="AUTOMOTIVE">AUTOMOTIVE</option>
-              <option value="MUSIC">MUSIC</option>
-              <option value="BANKING">BANKING</option>
-              <option value="NEWSPAPER PUBLISHERS">NEWSPAPER PUBLISHERS</option>
-              <option value="BROADCASTING">BROADCASTING</option>
-              <option value="ONLINE AUCTIONS">ONLINE AUCTIONS</option>
-              <option value="BROKERAGE">BROKERAGE</option>
-              <option value="PENSION FUNDS">PENSION FUNDS</option>
-              <option value="BIOTECHNOLOGY">BIOTECHNOLOGY</option>
-              <option value="PHARMACEUTICALS">PHARMACEUTICALS</option>
-              <option value="CALL CENTERS">CALL CENTERS</option>
-              <option value="PRIVATE EQUITY">PRIVATE EQUITY</option>
-              <option value="CARGO HANDLING">CARGO HANDLING</option>
-              <option value="PUBLISHING">PUBLISHING</option>
-              <option value="CHEMICAL">CHEMICAL</option>
-              <option value="REAL ESTATE">REAL ESTATE</option>
-              <option value="COMPUTER">COMPUTER</option>
-              <option value="RETAIL & WHOLESALE">RETAIL & WHOLESALE</option>
-              <option value="CONSULTING">CONSULTING</option>
-              <option value="SECURITIES & COMMODITY EXCHANGES">SECURITIES & COMMODITY EXCHANGES</option>
-              <option value="CONSUMER PRODUCTS">CONSUMER PRODUCTS</option>
-              <option value="SERVICE">SERVICE</option>
-              <option value="COSMETICS">COSMETICS</option>
-              <option value="SOAP & DETERGENT">SOAP & DETERGENT</option>
-              <option value="DEFENSE">DEFENSE</option>
-              <option value="SOFTWARE">SOFTWARE</option>
-              <option value="DEPARTMENT STORES">DEPARTMENT STORES</option>
-              <option value="SPORTS">SPORTS</option>
-              <option value="EDUCATION">EDUCATION</option>
-              <option value="TECHNOLOGY">TECHNOLOGY</option>
-              <option value="ELECTRONICS">ELECTRONICS</option>
-              <option value="TELECOMMUNICATIONS">TELECOMMUNICATIONS</option>
-              <option value="ENERGY">ENERGY</option>
-              <option value="TELEVISION">TELEVISION</option>
-              <option value="ENTERTAINMENT & LEISURE">ENTERTAINMENT & LEISURE</option>
-              <option value="TRANSPORTATION">TRANSPORTATION</option>
-              <option value="EXECUTIVE SEARCH">EXECUTIVE SEARCH</option>
-              <option value="TRUCKING">TRUCKING</option>
-              <option value="FINANCIAL SERVICES">FINANCIAL SERVICES</option>
-              <option value="VENTURE CAPITAL">VENTURE CAPITAL</option>
-              <option value="FOOD, BEVERAGE & TOBACCO">FOOD, BEVERAGE & TOBACCO</option>
-            </select>
-          </div>
-
-          <div class="col-lg-12 buttonWrap">
-            <input type="button" value="Enable" class="enable3 btn btn-success"/>
-            <input type="button" value="Disable" class="disable3 btn btn-danger"/>
-            <input type="button" value="Show" class="show3 btn btn-info"/>
-            <input type="button" value="Hide" class="hide3 btn btn-warning"/>
-          </div>
-
-          <div class="col-lg-8 buttonWrap">
-            <input class="form-control" placeholder="Enter value" id="optionValue"/>
-          </div>
-          <div class="col-lg-4 buttonWrap">
-            <input type="button" value="Select" class="select3 btn btn-success"/>
-            <input type="button" value="Deselect" class="deselect3 btn btn-danger"/>
-          </div>
-
-          <div class="col-lg-6 buttonWrap">
-            <input class="form-control" placeholder="Enter value" placeholder="Enter Value" id="newOptionValue"/>
-          </div>
-          <div class="col-lg-6 buttonWrap">
-            <input class="form-control" placeholder="Enter text" id="newOptionText"/>
-          </div>
-          <div class="col-lg-4 buttonWrap">
-            <input type="checkbox" id="newOptionSelected"/>
-            <label for="newOptionSelected">Pre Selected</label>
-          </div>
-          <div class="col-lg-4 buttonWrap">
-            <input type="button" value="Add Option" class="addOption3 btn btn-success"/>
-          </div>
-          <div class="col-lg-12 buttonWrap">
-            <h4>Events</h4>
-              <textarea id="eventsArea">
-
-              </textarea>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <h4>Code to show</h4>
-            <pre><code>$("input.show3").on("click", function () {
-              $("#industries3").multiselect("show");
-              });
-            </code></pre>
-          <h4>Code to hide</h4>
-          <pre><code>$("input.hide3").on("click", function () {
-            $("#industries3").multiselect("hide");
-            });</code></pre>
-          <h4>Code to select</h4>
-          <pre><code>$("input.select3").on("click", function () {
-            $("#industries3").multiselect("selectOption", $("#optionValue").val().trim());
-            });</code></pre>
-          <h4>Code to deselect</h4>
-          <pre><code>$("input.deselect3").on("click", function () {
-            $("#industries3").multiselect("deselectOption", $("#optionValue").val().trim());
-            });</code></pre>
-          <h4>Code to add option</h4>
-          <pre><code>$("input.addOption3").on("click", function () {
-            var option = {
-            value: $("#newOptionValue").val(),
-            html: $("#newOptionText").val(),
-            selected: $("#newOptionSelected").prop("checked")
-            }
-            $("#industries3").multiselect("addOption", option);
-            });</code></pre>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section id="main_content" class="inner">
-    <div>
-      <div id="fb-root">
-      </div>
-      <div
-        class="fb-like"
-        data-share="true"
-        data-width="450"
-        data-show-faces="true">
-      </div>
-    </div>
-    <div style="margin-top: 10px;"><a href="https://twitter.com/share" class="twitter-share-button"
-                                      data-hashtags="popupMultiSelect">Tweet</a></div>
-  </section>
-</div>
-
-<!-- FOOTER  -->
-<div id="footer_wrap" class="outer">
-  <footer class="inner">
-    <p class="copyright">Popupmultiselect maintained by harshniketseta (<a id="goToGithub" href="https://github.com/harshniketseta">GitHub</a>/<a id="goToLinkedin" href="https://www.linkedin.com/profile/view?id=59109284&trk=hp-identity-name">LinkedIn</a>)</p>
-
-    <p class="copyright">Popupmultiselect designed by <a href="https://www.behance.net/sokratus">sokratus</a></p>
-
-    <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
-  </footer>
-</div>
-
-
-</body>
-</html>
-
-<script>
-
-  $(document).ready(function () {
-
-    $(".tar_download_link").on("click", function () {
-      ga && ga('send', 'event', 'tar_download_link', 'click');
-    });
-
-    $(".zip_download_link").on("click", function () {
-      ga && ga('send', 'event', 'zip_download_link', 'click');
-    });
-
-    var trackLink = function(event){
-      event.preventDefault();
-
-      var jHref = $(this)
-        , href = jHref.attr("href")
-        ;
-
-      var t = setTimeout(function(){
-        window.location = href;
-      }, 250);
-
-      // send data to GA:
-      ga && ga('send', {
-        'hitType': 'event',
-        'eventCategory': 'link',
-        'eventAction': 'click',
-        'eventLabel': 'view_on_github',
-        'hitCallback': function () {
-          clearTimeout(t);
-          window.location = href;
+      (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+          return;
         }
-      });
-    };
-    
-    $("#forkme_banner").on("click", trackLink);
-    $("#goToGithub").on("click", trackLink);
-    $("#goToLinkedin").on("click", trackLink);
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
 
-    function addFBEventListeners() {
-      if (typeof FB !== 'undefined') {
-        clearInterval(window.fbCheck);
-        FB.Event.subscribe('edge.create', function (targetUrl) {
-          ga('send', 'social', 'facebook', 'like', targetUrl);
-        });
-      }
-    };
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+      <header class="inner">
+        <a data-event-label="fork_me_banner" id="forkme_banner" href="https://github.com/harshniketseta/popupMultiSelect">View on GitHub</a>
 
-    window.fbCheck = setInterval(addFBEventListeners, 100);
+        <a href="/popupMultiSelect"><h1 id="project_title">Popupmultiselect</h1></a>
 
-    function addtwttrEventListeners() {
-      if (typeof twttr !== 'undefined') {
-        clearInterval(window.twttrCheck);
-        twttr.ready(function (twttr) {
-          twttr.events.bind('tweet', track_tweet);
-        });
-      }
-    }
+        <h2 id="project_tagline">A popup with options. Allows multi select. Based on Bootstrap.</h2>
 
-    window.twttrCheck = setInterval(addtwttrEventListeners, 100);
+        <h3 style="color: white;">Examples</h3>
+        <section id="downloads">
+          <a class="zip_download_link" href="https://github.com/harshniketseta/popupMultiSelect/zipball/master">Download
+            this project as a .zip file</a>
+          <a class="tar_download_link" href="https://github.com/harshniketseta/popupMultiSelect/tarball/master">Download
+            this project as a tar.gz file</a>
+        </section>
+      </header>
+    </div>
 
-    function track_tweet(event) {
-      if (event) {
-        ga('send', {
-          'hitType': 'social',
-          'socialNetwork': 'Twitter',
-          'socialAction': 'Tweet',
-          'socialTarget': 'harshniketseta.github.io/popupMultiSelect/',
-          'page': '/examples'
-        });
-      }
-    }
-  });
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <ul id="navlist">
+          <li><a href="/popupMultiSelect">Home</a></li>
+          <li><a href="/popupMultiSelect/installation">Installation</a></li>
+          <li><a href="/popupMultiSelect/actions">Actions</a></li>
+          <li><a href="/popupMultiSelect/events">Events</a></li>
+          <li class="active"><a href="/popupMultiSelect/examples">Examples</a></li>
+          <li><a href="/popupMultiSelect/about">About</a></li>
+          <li><a href="/popupMultiSelect/contact">Contact</a></li>
+        </ul>
+      </section>
 
+      <section>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="col-lg-12 text-center">
+                <h4>Basic Example</h4>
+              </div>
 
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+              <div class="col-lg-12">
+                <select multiple name="company[industries]" id="industries1">
+                  <option value="AGRICULTURE" selected>AGRICULTURE</option>
+                  <option value="GROCERY">GROCERY</option>
+                  <option value="ACCOUNTING">ACCOUNTING</option>
+                  <option value="HEALTH CARE">HEALTH CARE</option>
+                  <option value="ADVERTISING">ADVERTISING</option>
+                  <option value="INTERNET PUBLISHING">INTERNET PUBLISHING</option>
+                  <option value="AEROSPACE">AEROSPACE</option>
+                  <option value="INVESTMENT BANKING">INVESTMENT BANKING</option>
+                  <option value="AIRCRAFT">AIRCRAFT</option>
+                  <option value="LEGAL">LEGAL</option>
+                  <option value="AIRLINE">AIRLINE</option>
+                  <option value="MANUFACTURING">MANUFACTURING</option>
+                  <option value="APPAREL & ACCESSORIES">APPAREL & ACCESSORIES</option>
+                  <option value="MOTION PICTURE & VIDEO">MOTION PICTURE & VIDEO</option>
+                  <option value="AUTOMOTIVE">AUTOMOTIVE</option>
+                  <option value="MUSIC">MUSIC</option>
+                  <option value="BANKING">BANKING</option>
+                  <option value="NEWSPAPER PUBLISHERS">NEWSPAPER PUBLISHERS</option>
+                  <option value="BROADCASTING">BROADCASTING</option>
+                  <option value="ONLINE AUCTIONS">ONLINE AUCTIONS</option>
+                  <option value="BROKERAGE">BROKERAGE</option>
+                  <option value="PENSION FUNDS">PENSION FUNDS</option>
+                  <option value="BIOTECHNOLOGY">BIOTECHNOLOGY</option>
+                  <option value="PHARMACEUTICALS">PHARMACEUTICALS</option>
+                  <option value="CALL CENTERS">CALL CENTERS</option>
+                  <option value="PRIVATE EQUITY">PRIVATE EQUITY</option>
+                  <option value="CARGO HANDLING">CARGO HANDLING</option>
+                  <option value="PUBLISHING">PUBLISHING</option>
+                  <option value="CHEMICAL">CHEMICAL</option>
+                  <option value="REAL ESTATE">REAL ESTATE</option>
+                  <option value="COMPUTER">COMPUTER</option>
+                  <option value="RETAIL & WHOLESALE">RETAIL & WHOLESALE</option>
+                  <option value="CONSULTING">CONSULTING</option>
+                  <option value="SECURITIES & COMMODITY EXCHANGES">SECURITIES & COMMODITY EXCHANGES</option>
+                  <option value="CONSUMER PRODUCTS">CONSUMER PRODUCTS</option>
+                  <option value="SERVICE">SERVICE</option>
+                  <option value="COSMETICS">COSMETICS</option>
+                  <option value="SOAP & DETERGENT">SOAP & DETERGENT</option>
+                  <option value="DEFENSE">DEFENSE</option>
+                  <option value="SOFTWARE">SOFTWARE</option>
+                  <option value="DEPARTMENT STORES">DEPARTMENT STORES</option>
+                  <option value="SPORTS">SPORTS</option>
+                  <option value="EDUCATION">EDUCATION</option>
+                  <option value="TECHNOLOGY">TECHNOLOGY</option>
+                  <option value="ELECTRONICS">ELECTRONICS</option>
+                  <option value="TELECOMMUNICATIONS">TELECOMMUNICATIONS</option>
+                  <option value="ENERGY">ENERGY</option>
+                  <option value="TELEVISION">TELEVISION</option>
+                  <option value="ENTERTAINMENT & LEISURE">ENTERTAINMENT & LEISURE</option>
+                  <option value="TRANSPORTATION">TRANSPORTATION</option>
+                  <option value="EXECUTIVE SEARCH">EXECUTIVE SEARCH</option>
+                  <option value="TRUCKING">TRUCKING</option>
+                  <option value="FINANCIAL SERVICES">FINANCIAL SERVICES</option>
+                  <option value="VENTURE CAPITAL">VENTURE CAPITAL</option>
+                  <option value="FOOD, BEVERAGE & TOBACCO" selected>FOOD, BEVERAGE & TOBACCO</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <h4>Code</h4>
+                  <pre><code>$("#industries1").multiselect({title: "Select Industry",
+                    maxSelectionAllowed: 5});</code></pre>
 
-  ga('create', 'UA-63624467-1', 'auto');
-  ga('send', 'pageview');
+            </div>
+          </div>
 
-</script>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="col-lg-12 text-center">
+                <h4>Basic Example (Disabled)</h4>
+              </div>
+              <div class="col-lg-12">
+                <select multiple name="company[industries]" id="industries2" disabled>
+                  <option value="AGRICULTURE" selected>AGRICULTURE</option>
+                  <option value="GROCERY">GROCERY</option>
+                  <option value="ACCOUNTING">ACCOUNTING</option>
+                  <option value="HEALTH CARE">HEALTH CARE</option>
+                  <option value="ADVERTISING">ADVERTISING</option>
+                  <option value="INTERNET PUBLISHING">INTERNET PUBLISHING</option>
+                  <option value="AEROSPACE">AEROSPACE</option>
+                  <option value="INVESTMENT BANKING">INVESTMENT BANKING</option>
+                  <option value="AIRCRAFT">AIRCRAFT</option>
+                  <option value="LEGAL">LEGAL</option>
+                  <option value="AIRLINE">AIRLINE</option>
+                  <option value="MANUFACTURING">MANUFACTURING</option>
+                  <option value="APPAREL & ACCESSORIES">APPAREL & ACCESSORIES</option>
+                  <option value="MOTION PICTURE & VIDEO">MOTION PICTURE & VIDEO</option>
+                  <option value="AUTOMOTIVE">AUTOMOTIVE</option>
+                  <option value="MUSIC">MUSIC</option>
+                  <option value="BANKING">BANKING</option>
+                  <option value="NEWSPAPER PUBLISHERS">NEWSPAPER PUBLISHERS</option>
+                  <option value="BROADCASTING">BROADCASTING</option>
+                  <option value="ONLINE AUCTIONS">ONLINE AUCTIONS</option>
+                  <option value="BROKERAGE">BROKERAGE</option>
+                  <option value="PENSION FUNDS">PENSION FUNDS</option>
+                  <option value="BIOTECHNOLOGY">BIOTECHNOLOGY</option>
+                  <option value="PHARMACEUTICALS">PHARMACEUTICALS</option>
+                  <option value="CALL CENTERS">CALL CENTERS</option>
+                  <option value="PRIVATE EQUITY">PRIVATE EQUITY</option>
+                  <option value="CARGO HANDLING">CARGO HANDLING</option>
+                  <option value="PUBLISHING">PUBLISHING</option>
+                  <option value="CHEMICAL">CHEMICAL</option>
+                  <option value="REAL ESTATE">REAL ESTATE</option>
+                  <option value="COMPUTER">COMPUTER</option>
+                  <option value="RETAIL & WHOLESALE">RETAIL & WHOLESALE</option>
+                  <option value="CONSULTING">CONSULTING</option>
+                  <option value="SECURITIES & COMMODITY EXCHANGES">SECURITIES & COMMODITY EXCHANGES</option>
+                  <option value="CONSUMER PRODUCTS">CONSUMER PRODUCTS</option>
+                  <option value="SERVICE">SERVICE</option>
+                  <option value="COSMETICS">COSMETICS</option>
+                  <option value="SOAP & DETERGENT">SOAP & DETERGENT</option>
+                  <option value="DEFENSE">DEFENSE</option>
+                  <option value="SOFTWARE">SOFTWARE</option>
+                  <option value="DEPARTMENT STORES">DEPARTMENT STORES</option>
+                  <option value="SPORTS">SPORTS</option>
+                  <option value="EDUCATION">EDUCATION</option>
+                  <option value="TECHNOLOGY">TECHNOLOGY</option>
+                  <option value="ELECTRONICS">ELECTRONICS</option>
+                  <option value="TELECOMMUNICATIONS">TELECOMMUNICATIONS</option>
+                  <option value="ENERGY">ENERGY</option>
+                  <option value="TELEVISION">TELEVISION</option>
+                  <option value="ENTERTAINMENT & LEISURE">ENTERTAINMENT & LEISURE</option>
+                  <option value="TRANSPORTATION">TRANSPORTATION</option>
+                  <option value="EXECUTIVE SEARCH">EXECUTIVE SEARCH</option>
+                  <option value="TRUCKING">TRUCKING</option>
+                  <option value="FINANCIAL SERVICES">FINANCIAL SERVICES</option>
+                  <option value="VENTURE CAPITAL">VENTURE CAPITAL</option>
+                  <option value="FOOD, BEVERAGE & TOBACCO" selected>FOOD, BEVERAGE & TOBACCO</option>
+                </select>
+              </div>
+
+              <div class="col-lg-12 buttonWrap">
+                <input type="button" value="Enable" class="enable2 btn btn-success"/>
+                <input type="button" value="Disable" class="disable2 btn btn-danger"/>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <h4>Code to enable</h4>
+                <pre><code>$("input.enable").on("click", function(){
+                  $("#industries2").multiselect("enable");
+                  });
+                </code></pre>
+              <h4>Code to disable</h4>
+              <pre><code>$("input.disable").on("click", function(){
+                $("#industries2").multiselect("disable");
+                });</code></pre>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="col-lg-12 text-center">
+                <h4>Basic Example (Action and Events)</h4>
+              </div>
+              <div class="col-lg-12">
+                <select multiple name="company[industries]" id="industries3">
+                  <option value="AGRICULTURE">AGRICULTURE</option>
+                  <option value="GROCERY">GROCERY</option>
+                  <option value="ACCOUNTING">ACCOUNTING</option>
+                  <option value="HEALTH CARE">HEALTH CARE</option>
+                  <option value="ADVERTISING">ADVERTISING</option>
+                  <option value="INTERNET PUBLISHING">INTERNET PUBLISHING</option>
+                  <option value="AEROSPACE">AEROSPACE</option>
+                  <option value="INVESTMENT BANKING">INVESTMENT BANKING</option>
+                  <option value="AIRCRAFT">AIRCRAFT</option>
+                  <option value="LEGAL">LEGAL</option>
+                  <option value="AIRLINE">AIRLINE</option>
+                  <option value="MANUFACTURING">MANUFACTURING</option>
+                  <option value="APPAREL & ACCESSORIES">APPAREL & ACCESSORIES</option>
+                  <option value="MOTION PICTURE & VIDEO">MOTION PICTURE & VIDEO</option>
+                  <option value="AUTOMOTIVE">AUTOMOTIVE</option>
+                  <option value="MUSIC">MUSIC</option>
+                  <option value="BANKING">BANKING</option>
+                  <option value="NEWSPAPER PUBLISHERS">NEWSPAPER PUBLISHERS</option>
+                  <option value="BROADCASTING">BROADCASTING</option>
+                  <option value="ONLINE AUCTIONS">ONLINE AUCTIONS</option>
+                  <option value="BROKERAGE">BROKERAGE</option>
+                  <option value="PENSION FUNDS">PENSION FUNDS</option>
+                  <option value="BIOTECHNOLOGY">BIOTECHNOLOGY</option>
+                  <option value="PHARMACEUTICALS">PHARMACEUTICALS</option>
+                  <option value="CALL CENTERS">CALL CENTERS</option>
+                  <option value="PRIVATE EQUITY">PRIVATE EQUITY</option>
+                  <option value="CARGO HANDLING">CARGO HANDLING</option>
+                  <option value="PUBLISHING">PUBLISHING</option>
+                  <option value="CHEMICAL">CHEMICAL</option>
+                  <option value="REAL ESTATE">REAL ESTATE</option>
+                  <option value="COMPUTER">COMPUTER</option>
+                  <option value="RETAIL & WHOLESALE">RETAIL & WHOLESALE</option>
+                  <option value="CONSULTING">CONSULTING</option>
+                  <option value="SECURITIES & COMMODITY EXCHANGES">SECURITIES & COMMODITY EXCHANGES</option>
+                  <option value="CONSUMER PRODUCTS">CONSUMER PRODUCTS</option>
+                  <option value="SERVICE">SERVICE</option>
+                  <option value="COSMETICS">COSMETICS</option>
+                  <option value="SOAP & DETERGENT">SOAP & DETERGENT</option>
+                  <option value="DEFENSE">DEFENSE</option>
+                  <option value="SOFTWARE">SOFTWARE</option>
+                  <option value="DEPARTMENT STORES">DEPARTMENT STORES</option>
+                  <option value="SPORTS">SPORTS</option>
+                  <option value="EDUCATION">EDUCATION</option>
+                  <option value="TECHNOLOGY">TECHNOLOGY</option>
+                  <option value="ELECTRONICS">ELECTRONICS</option>
+                  <option value="TELECOMMUNICATIONS">TELECOMMUNICATIONS</option>
+                  <option value="ENERGY">ENERGY</option>
+                  <option value="TELEVISION">TELEVISION</option>
+                  <option value="ENTERTAINMENT & LEISURE">ENTERTAINMENT & LEISURE</option>
+                  <option value="TRANSPORTATION">TRANSPORTATION</option>
+                  <option value="EXECUTIVE SEARCH">EXECUTIVE SEARCH</option>
+                  <option value="TRUCKING">TRUCKING</option>
+                  <option value="FINANCIAL SERVICES">FINANCIAL SERVICES</option>
+                  <option value="VENTURE CAPITAL">VENTURE CAPITAL</option>
+                  <option value="FOOD, BEVERAGE & TOBACCO">FOOD, BEVERAGE & TOBACCO</option>
+                </select>
+              </div>
+
+              <div class="col-lg-12 buttonWrap">
+                <input type="button" value="Enable" class="enable3 btn btn-success"/>
+                <input type="button" value="Disable" class="disable3 btn btn-danger"/>
+                <input type="button" value="Show" class="show3 btn btn-info"/>
+                <input type="button" value="Hide" class="hide3 btn btn-warning"/>
+              </div>
+
+              <div class="col-lg-8 buttonWrap">
+                <input class="form-control" placeholder="Enter value" id="optionValue"/>
+              </div>
+              <div class="col-lg-4 buttonWrap">
+                <input type="button" value="Select" class="select3 btn btn-success"/>
+                <input type="button" value="Deselect" class="deselect3 btn btn-danger"/>
+              </div>
+
+              <div class="col-lg-6 buttonWrap">
+                <input class="form-control" placeholder="Enter value" placeholder="Enter Value" id="newOptionValue"/>
+              </div>
+              <div class="col-lg-6 buttonWrap">
+                <input class="form-control" placeholder="Enter text" id="newOptionText"/>
+              </div>
+              <div class="col-lg-4 buttonWrap">
+                <input type="checkbox" id="newOptionSelected"/>
+                <label for="newOptionSelected">Pre Selected</label>
+              </div>
+              <div class="col-lg-4 buttonWrap">
+                <input type="button" value="Add Option" class="addOption3 btn btn-success"/>
+              </div>
+              <div class="col-lg-12 buttonWrap">
+                <h4>Events</h4>
+                  <textarea id="eventsArea">
+
+                  </textarea>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <h4>Code to show</h4>
+                <pre><code>$("input.show3").on("click", function () {
+                  $("#industries3").multiselect("show");
+                  });
+                </code></pre>
+              <h4>Code to hide</h4>
+              <pre><code>$("input.hide3").on("click", function () {
+                $("#industries3").multiselect("hide");
+                });</code></pre>
+              <h4>Code to select</h4>
+              <pre><code>$("input.select3").on("click", function () {
+                $("#industries3").multiselect("selectOption", $("#optionValue").val().trim());
+                });</code></pre>
+              <h4>Code to deselect</h4>
+              <pre><code>$("input.deselect3").on("click", function () {
+                $("#industries3").multiselect("deselectOption", $("#optionValue").val().trim());
+                });</code></pre>
+              <h4>Code to add option</h4>
+              <pre><code>$("input.addOption3").on("click", function () {
+                var option = {
+                value: $("#newOptionValue").val(),
+                html: $("#newOptionText").val(),
+                selected: $("#newOptionSelected").prop("checked")
+                }
+                $("#industries3").multiselect("addOption", option);
+                });</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="main_content" class="inner">
+        <div>
+          <div id="fb-root">
+          </div>
+          <div
+            class="fb-like"
+            data-share="true"
+            data-width="450"
+            data-show-faces="true">
+          </div>
+        </div>
+        <div style="margin-top: 10px;"><a href="https://twitter.com/share" class="twitter-share-button"
+                                          data-hashtags="popupMultiSelect">Tweet</a></div>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Popupmultiselect maintained by harshniketseta (<a data-event-label="goto_github" id="goToGithub" href="https://github.com/harshniketseta">GitHub</a>/<a data-event-label="goto_linkedin" id="goToLinkedin" href="https://www.linkedin.com/profile/view?id=59109284&trk=hp-identity-name">LinkedIn</a>)
+        </p>
+
+        <p class="copyright">Popupmultiselect designed by <a href="https://www.behance.net/sokratus">sokratus</a></p>
+
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+  </body>
+</html>
 
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
