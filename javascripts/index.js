@@ -45,6 +45,7 @@ $(document).ready(function () {
   $("#forkme_banner").on("click", trackLink);
   $("#goToGithub").on("click", trackLink);
   $("#goToLinkedin").on("click", trackLink);
+  $(".mailTo").on("click", trackLink);
 
   function track_tweet(event) {
     if (event) {
