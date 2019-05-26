@@ -1,5 +1,5 @@
 {
-  "name": "multiselect",
+  "name": "popup-multiselect",
   "description": "Popup Multi Select Widget based on Bootstrap.",
   "version": "1.0.4",
   "private": false,
