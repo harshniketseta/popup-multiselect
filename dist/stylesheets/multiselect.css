@@ -51,7 +51,6 @@
   display: block;
 }
 .selectWrap > .select-content > .addedOption {
-  display: inline-block;
   color: white;
   background-color: #ffffff;
   border: 1px solid #333;
