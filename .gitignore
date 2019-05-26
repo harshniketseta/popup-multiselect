@@ -13,6 +13,9 @@
 # Ignore all vagrant stuff:
 .vagrant
 
+# Ignore yarn error logs
+yarn-error.log
+
 # Ignore all node modules components.
 node_modules/
 .sass-cache
