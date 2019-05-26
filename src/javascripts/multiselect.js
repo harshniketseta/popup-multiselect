@@ -379,7 +379,7 @@
     }
 
     if (this.modalShown) {
-      this.getModalBody().append(optionObj.createModalOption());
+      this.getModalBody().html(this.getModalBodyContent());
     }
   };
 
