@@ -13,9 +13,6 @@
 # Ignore all vagrant stuff:
 .vagrant
 
-# Ignore all bower components.
-bower_components/
-
 # Ignore all node modules components.
 node_modules/
 .sass-cache
