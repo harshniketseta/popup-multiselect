@@ -1,13 +1,14 @@
 {
   "name": "popup-multiselect",
   "description": "Popup Multi Select Widget based on Bootstrap.",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "private": false,
   "homepage": "https://github.com/harshniketseta/popupMultiSelect",
   "author": {
     "name": "Harshniket Seta",
     "email": "harshniketseta@gmail.com"
   },
+  "keywords":["bootstrap", "bootstrap4", "select", "multi", "popup", "modal"],
   "license": {
     "type": "MIT",
     "url": "https://github.com/harshniketseta/popupMultiSelect/blob/master/LICENSE"
