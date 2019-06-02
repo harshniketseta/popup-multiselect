@@ -4,7 +4,7 @@
  * Popup Multi Select
  * Created By Harshniket Seta
  * Currently maintained by harshniketseta [at] gmail [dot] com
- * Version: 2.0.1
+ * Version: 2.1.0
  * Release: 2019-05-26
  * ======================================================================== */
 
@@ -32,14 +32,15 @@
 
   MultiSelect.DEFAULTS = {
     animation: true,
+    modalSize: "sm",
     selectTemplate:
-      '<div class="selectWrap clearfix"><span class="select-content"></span><a href="#" class="open-options clickable"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></a></div>',
+      '<div class="selectWrap clearfix"><span class="select-content"></span><a href="#" class="open-options clickable"><span class="icon icon-list">&#9776;</span></a></div>',
     selectOptionTemplate:
-      '<span class="addedOption" ><span class="text"></span><span class="clickable removeOption"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span></span>',
+      '<span class="addedOption" ><span class="text"></span><span class="clickable removeOption"><span class="icon icon-remove" aria-hidden="true"></span></span></span>',
     modalTemplate:
-      '<div class="select modal in" aria-hidden="false"><div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header"><span class="pull-right clickable close" aria-hidden="true">x</span><h4 class="modal-title"></h4><div class="help-block"></div></div><div class="modal-body"></div></div></div></div>',
+      '<div class="select modal in" aria-hidden="false"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><div><h5 class="modal-title"></h5><div class="help-block"></div></div><span class="float-right clickable close" aria-hidden="true">x</span></div><div class="modal-body"></div></div></div></div>',
     modalOptionTemplate:
-      '<div class="option clickable"><span class="option-text"></span><span class="option-tick"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span></div>',
+      '<div class="option clickable"><span class="option-text"></span><span class="option-tick"><span class="icon icon-ok" aria-hidden="true">&#x2713;</span></span></div>',
     title: "Select Options"
   };
 
@@ -116,6 +117,7 @@
     if (!this.multiple) {
       options.maxSelectionAllowed = 1;
     }
+
     return options;
   };
 
@@ -153,7 +155,7 @@
 
   MultiSelect.prototype.getSelectOpenIcon = function() {
     var $openOptions = this.getMultiSelectOpen(),
-      optionsOpenIcon = $openOptions.find("span.glyphicon");
+      optionsOpenIcon = $openOptions.find("span.icon");
     return optionsOpenIcon;
   };
 
@@ -181,6 +183,7 @@
       this.getModalHelpBlock(this.$modal).html(this.getModalHelpTextContent());
       this.getModalTitleBlock(this.$modal).html(this.getModalTitle());
       this.getModalBody(this.$modal).html(this.getModalBodyContent());
+      this.getModalDialog(this.$modal).addClass(this.getModalSizeClass());
       this.initModal(this.$modal);
     }
 
@@ -209,6 +212,12 @@
     return $modal.find(".modal-body");
   };
 
+  MultiSelect.prototype.getModalDialog = function($modal) {
+    $modal = $modal || this.getModal();
+
+    return $modal.find(".modal-dialog");
+  };
+
   MultiSelect.prototype.getModalHelpTextContent = function(jOption, action) {
     var helpText = "",
       currentlySelectedLength = this.getSelected().length,
@@ -229,6 +238,10 @@
 
   MultiSelect.prototype.getModalTitle = function() {
     return this.options.title;
+  };
+
+  MultiSelect.prototype.getModalSizeClass = function() {
+    return "modal-" + this.options.modalSize;
   };
 
   MultiSelect.prototype.getModalBodyContent = function() {
