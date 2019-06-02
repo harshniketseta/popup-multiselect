@@ -1,12 +1,23 @@
 {
   "name": "popup-multiselect",
   "description": "Popup Multi Select Widget based on Bootstrap.",
-  "version": "3.0.0",
+  "version": "3.0.1",
+  "version_short": "3.0",
   "private": false,
   "homepage": "https://github.com/harshniketseta/popupMultiSelect",
   "author": {
     "name": "Harshniket Seta",
     "email": "harshniketseta@gmail.com"
+  },
+  "style": "dist/stylesheets/popup-multiselect.css",
+  "sass": "src/stylesheets/popup-multiselect.scss",
+  "main": "dist/javascripts/popup-multiselect.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harshniketseta/popup-multiselect"
+  },
+  "bugs": {
+    "url": "https://github.com/harshniketseta/popup-multiselect/issues"
   },
   "keywords":["bootstrap", "bootstrap4", "select", "multi", "popup", "modal"],
   "license": "MIT",
@@ -18,8 +29,17 @@
     "grunt-contrib-uglify": "^4.0.1",
     "grunt-contrib-watch": "^1.1.0"
   },
-  "dependencies": {
+  "dependencies": {},
+  "peerDependencies": {
     "bootstrap": ">=3.4.1",
     "jquery": ">=3.4.0"
-  }
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "files": [
+    "dist/{css,js}/*.{css,js,map}",
+    "js/{src,dist}/**/*.{js,map}",
+    "scss/**/*.scss"
+  ]
 }
