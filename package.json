@@ -9,10 +9,7 @@
     "email": "harshniketseta@gmail.com"
   },
   "keywords":["bootstrap", "bootstrap4", "select", "multi", "popup", "modal"],
-  "license": {
-    "type": "MIT",
-    "url": "https://github.com/harshniketseta/popupMultiSelect/blob/master/LICENSE"
-  },
+  "license": "MIT",
   "devDependencies": {
     "grunt": "^1.0.4",
     "grunt-contrib-cssmin": "^3.0.0",
