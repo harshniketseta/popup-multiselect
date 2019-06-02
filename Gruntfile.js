@@ -8,7 +8,7 @@ module.exports = function(grunt) {
       options: {
         laxcomma: true
       },
-      javascripts: ["src/javascripts/multiselect.js"]
+      javascripts: ["src/javascripts/popup-multiselect.js"]
     },
     uglify: {
       options: {
@@ -20,8 +20,8 @@ module.exports = function(grunt) {
           " */\n"
       },
       build: {
-        src: "src/javascripts/multiselect.js",
-        dest: "dist/javascripts/multiselect.min.js"
+        src: "src/javascripts/popup-multiselect.js",
+        dest: "dist/javascripts/popup-multiselect.min.js"
       }
     },
     sass: {
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
         },
         files: {
           // Dictionary of files
-          "dist/stylesheets/multiselect.css": "src/stylesheets/multiselect.scss"
+          "dist/stylesheets/popup-multiselect.css": "src/stylesheets/popup-multiselect.scss"
         }
       }
     },
@@ -44,7 +44,7 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd: "dist/stylesheets",
-            src: ["multiselect.css", "!*.min.css"],
+            src: ["popup-multiselect.css", "!*.min.css"],
             dest: "dist/stylesheets",
             ext: ".min.css"
           }
@@ -57,8 +57,8 @@ module.exports = function(grunt) {
           livereload: true
         },
         files: [
-          "src/stylesheets/multiselect.scss",
-          "src/javascripts/multiselect.js"
+          "src/stylesheets/popup-multiselect.scss",
+          "src/javascripts/popup-multiselect.js"
         ],
         tasks: ["default"]
       }
