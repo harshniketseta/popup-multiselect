@@ -36,9 +36,9 @@
     selectTemplate:
       '<div class="selectWrap clearfix"><span class="select-content"></span><a href="#" class="open-options clickable"><span class="icon icon-list">&#9776;</span></a></div>',
     selectOptionTemplate:
-      '<span class="addedOption" ><span class="text"></span><span class="clickable removeOption"><span class="icon icon-remove" aria-hidden="true"></span></span></span>',
+      '<span class="addedOption" ><span class="text"></span><span class="clickable removeOption"><span class="icon icon-remove" aria-hidden="true">&#9747;</span></span></span>',
     modalTemplate:
-      '<div class="select modal in" aria-hidden="false"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><div><h5 class="modal-title"></h5><div class="help-block"></div></div><span class="float-right clickable close" aria-hidden="true">x</span></div><div class="modal-body"></div></div></div></div>',
+      '<div class="select modal in" aria-hidden="false"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><div><h5 class="modal-title"></h5><div class="help-block"></div></div><span class="float-right clickable close" aria-hidden="true">&#9747;</span></div><div class="modal-body"></div></div></div></div>',
     modalOptionTemplate:
       '<div class="option clickable"><span class="option-text"></span><span class="option-tick"><span class="icon icon-ok" aria-hidden="true">&#x2713;</span></span></div>',
     title: "Select Options"
