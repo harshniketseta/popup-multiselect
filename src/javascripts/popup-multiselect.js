@@ -4,7 +4,7 @@
  * Popup Multi Select
  * Created By Harshniket Seta
  * Currently maintained by harshniketseta [at] gmail [dot] com
- * Version: 3.0.1
+ * Version: 3.0.2
  * Release: 2019-06-03
  * ======================================================================== */
 
