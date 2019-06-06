@@ -1,7 +1,7 @@
 {
   "name": "popup-multiselect",
   "description": "Popup Multi Select Widget based on Bootstrap.",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "version_short": "3.0",
   "private": false,
   "homepage": "https://github.com/harshniketseta/popupMultiSelect",
@@ -11,7 +11,7 @@
   },
   "style": "dist/stylesheets/popup-multiselect.css",
   "sass": "src/stylesheets/popup-multiselect.scss",
-  "main": "dist/javascripts/popup-multiselect.js",
+  "browser": "dist/javascripts/popup-multiselect.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/harshniketseta/popup-multiselect"
@@ -19,7 +19,14 @@
   "bugs": {
     "url": "https://github.com/harshniketseta/popup-multiselect/issues"
   },
-  "keywords":["bootstrap", "bootstrap4", "select", "multi", "popup", "modal"],
+  "keywords": [
+    "bootstrap",
+    "bootstrap4",
+    "select",
+    "multi",
+    "popup",
+    "modal"
+  ],
   "license": "MIT",
   "devDependencies": {
     "grunt": "^1.0.4",

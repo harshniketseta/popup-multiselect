@@ -4,8 +4,8 @@
  * Popup Multi Select
  * Created By Harshniket Seta
  * Currently maintained by harshniketseta [at] gmail [dot] com
- * Version: 3.0.2
- * Release: 2019-06-03
+ * Version: 3.1.0
+ * Release: 2019-06-07
  * ======================================================================== */
 
 (function($) {
@@ -28,7 +28,7 @@
 
   if (!$.fn.modal) throw new Error("MultiSelect requires modal.js");
 
-  MultiSelect.VERSION = "0.2.0";
+  MultiSelect.VERSION = "3.1.0";
 
   MultiSelect.DEFAULTS = {
     animation: true,
