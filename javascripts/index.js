@@ -53,7 +53,7 @@ $(document).ready(function () {
         'hitType': 'social',
         'socialNetwork': 'Twitter',
         'socialAction': 'Tweet',
-        'socialTarget': 'harshniketseta.github.io/popupMultiSelect/',
+        'socialTarget': 'harshniketseta.github.io/popup-multiselect/',
         'page': '/'
       });
     }
@@ -87,7 +87,7 @@ $(document).ready(function () {
         'hitType': 'social',
         'socialNetwork': 'Twitter',
         'socialAction': 'Tweet',
-        'socialTarget': 'harshniketseta.github.io/popupMultiSelect/',
+        'socialTarget': 'harshniketseta.github.io/popup-multiselect/',
         'page': '/installation'
       });
     }
