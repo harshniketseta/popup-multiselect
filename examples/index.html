@@ -218,6 +218,22 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="col-lg-12 text-center">
+                <h4>Getting Values</h4>
+              </div>
+
+              <div class="col-lg-12">
+                <pre><code>['AGRICULTURE', 'FOOD, BEVERAGE & TOBACCO']</code></pre>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <h4>Code</h4>
+              <pre><code>$("#industries1").multiselect("getSelected").val();</code></pre>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="col-lg-12 text-center">
                 <h4>Basic Example (Disabled)</h4>
               </div>
               <div class="col-lg-12">
@@ -424,9 +440,14 @@
               </div>
 
               <div class="col-lg-8 buttonWrap">
+                <div style="margin-top:20px">
+                  <h5>Selecting/Deselecting already present option</h5>
+                </div>
+                
                 <input
                   class="form-control"
                   placeholder="Enter value"
+                  value="ADVERTISING"
                   id="optionValue"
                 />
               </div>
@@ -444,6 +465,10 @@
               </div>
 
               <div class="col-lg-6 buttonWrap">
+                <div style="margin-top:20px">
+                  <h5>Adding a new option dynamically</h5>
+                </div>
+
                 <input
                   class="form-control"
                   placeholder="Enter value"
