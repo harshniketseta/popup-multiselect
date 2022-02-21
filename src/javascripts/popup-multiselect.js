@@ -86,6 +86,18 @@
     return options;
   };
 
+  MultiSelect.prototype.getSelected = function() {
+    var selected_options = [],
+      configuration = this.getOptionConfig();
+      
+    $.each(this.$element.find("option"), function(index, option) {
+      var optionObj = new MultiSelect.Option(option, configuration);
+      selected_options.push(optionObj);
+    });
+
+    return selected_options;
+  };
+
   MultiSelect.prototype.replaceDefaultSelect = function($element) {
     var $multiSelect = this.getMultiSelect();
     $element.replaceWith($multiSelect);
